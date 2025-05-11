@@ -1,0 +1,168 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english]{babel}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{enumitem} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usepackage[english]{babel}
+\usepackage{mathtools}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{cite}
+
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{exercise}[theorem]{Exercise}
+
+
+\title{Probability Theory}
+\author{Saxon Supple}
+\date{May 2025}
+
+\begin{document}
+
+\maketitle
+
+\begin{exercise}
+Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space, and let $A_1,...,A_n$ be measurable sets. Prove by induction that\[\mathbb{P}(\bigcup_{i=1}^nA_i)\geq\sum_{i=1}^n\mathbb{P}(A_i)-\sum_{1\leq i < j\leq n}\mathbb{P}(A_i\cap A_j).\]
+\end{exercise}
+
+\begin{exercise}
+Suppose $(\Omega,\mathcal{A},\mathbb{P})$ is a probability space and $X:\Omega\to[0,\infty)$ is a non-negative random variable.
+\begin{enumerate}
+    \item[(a)] Let $A_n=\{\omega\in\Omega:X(\omega)\leq n\}$. Prove that $\mathbb{E}[X\mathbf{1}_{A_n
+    }]\to\mathbb{E}[X]$ as $n\to\infty$.
+    \item[(b)] Prove that if $\mathbb{E}[X]<\infty$, then $\mathbb{E}[X\mathbf{1}_{A_n^c}]\to0$ as $n\to\infty$.
+    \item[(c)] Suppose $\mathbb{E}[X]<\infty$. Prove that\[\lim_{\delta\downarrow0}\sup_{\{A\in\mathcal{F}:\mathbb{P}(A)<\delta\}}\mathbb{E}[X\mathbf{1}_A]=0,\]that is, given $\epsilon > 0$ there exists a $\delta >0$ such that for all $A\in\mathbf{A}$ with $\mathbb{P}(A)<\delta$, we have $\mathbb{E}[X\mathbf{1}_A]<\epsilon$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Let $\Omega=\{1,2,3,4,5,6\}$ with $\mathcal{A}=\mathcal{P}(\Omega)$ and let $\mathcal{C}=\{A,B\}$ with $A=\{1,2,3,4\}$ and $B=\{3,4,5\}$. What are the sets of $\sigma(\mathcal{C})$?
+\end{exercise}
+
+\begin{exercise}
+Let $\Omega=\{1,2,3,4\}$ and let $\mathcal{A}$ be the $\sigma$-algebra $\sigma(\{\{1\},\{2\},\{3,4\}\})$ on $\Omega$.
+\begin{enumerate}
+    \item[(a)] Give an example of a subset of $\Omega$ that is not in $\mathcal{A}$.
+    \item[(b)] Give an example of a function $f:\Omega\to\mathbb{R}$ that is not measurable.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Let $(\Omega,\mathcal{A},\mathbb{P})$ be a probability space. Suppose that $\mathcal{C}$ is a finite partition of $\Omega$ with $\mathcal{C}\subset\mathcal{A}$, i.e. suppose that $\mathcal{C}=\{A_1,...,A_n\}$ with the sets $A_i$ partitioning $\Omega$, and with each $A_i$ in $\mathcal{A}$. Likewise, suppose that $\mathcal{B}=\{B_1,...,B_m\}$ is a finite partition of $\Omega$ with $\mathcal{B}\subset\mathcal{A}$.
+\begin{enumerate}
+    \item[(a)] Suppose that $\mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B)$ for all events $A\in\mathcal{C}$ and $B\in\mathcal{B}$. Prove that $\sigma(\mathcal{C})$ and $\sigma(\mathcal{B})$ are independent $\sigma$-algebras.
+    \item[(b)] Does the conclusion still hold if $\mathcal{C}=\{A_1,A_2,...\}$ and $\mathcal{B}=\{B_1,B_2,...\}$ are countably infinite partitions of $\Omega$ but otherwise things are as described above? Explain briefly.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+\begin{enumerate}
+    \item[(a)] Prove Markov's inequality, which says that if $X$  is a non-negative random variable and $a>0$, then $\mathbb{P}(X\geq a)\leq a^{-1}\mathbb{E}[X]$.
+    \item[(b)] Prove that, if $X$ is a non-negative random variable with $\mathbb{E}[X]=0$, then $\mathbb{P}(X=0)=1$.
+    \item[(c)] Suppose $X$ is a random variable with $\mathbb{E}[X]=\mu$ and $\text{Var}(X)=0$. Prove that $\mathbb{P}(X=\mu)=1$.
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Let $X$ and $Y$ be random variables on the same probability space $(\Omega,\mathcal{F},\mathbb{P})$.
+\begin{enumerate}
+    \item[(a)] Let $\mathcal{C}$ be the class of events of the form $\{X<t\},t\in\mathbb{R}$. Show that $\sigma(\mathcal{C})=\sigma(X)$.
+    \item[(b)] Show that $\mathcal{C}$ is a $\pi$-system.
+    \item[(c)] Suppose that $\mathbb{P}(\{X<a\}\cap\{Y<b\})=\mathbb{P}(X<a)\mathbb{P}(Y<b)$ for all real numbers $a$ and $b$. Let $\mathcal{C}$ be as in (a), and $\mathcal{C}'=\{\{Y<t\}:t\in\mathbb{R}\}$.
+    \begin{itemize}
+        \item[1.] Fix $A\in\mathcal{C}$ and set $\mu_A(B)=\mathbb{P}(A\cap B)$ and $\mu_A'(B)=\mathbb{P}(A)\mathbb{P}(B)$ for all $B\in\sigma(\mathcal{C}')$. Show that $\mu_A=\mu_A'$ on $\sigma(\mathcal{C}')$.
+        \item[2.] Fix $B\in\sigma(\mathcal{C}')$, and set $\nu_B(A)=\mathbb{P}(A\cap B)$ and $\nu_B'(A)=\mathbb{P}(A)\mathbb{P}(B)$ for all $A\in\sigma(\mathcal{C})$. Show that $\nu_B=\nu_B'$ on $\sigma(\mathcal{C})$.
+        \item[3.] Show that $X$ and $Y$ are independent random variables.
+    \end{itemize}
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+Let $\mathcal{F}$ be a sub-$\sigma$-algebra. Let $U$ and $V$ be two $\mathcal{F}$-measurable random variables.
+\begin{enumerate}
+    \item[(a)] Show that $U+V$ is $\mathcal{F}$-measurable.
+    \item[(b)] Show that $UV$ is $\mathcal{F}$-measurable.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+Let $(X_i)_{i \geq 1}$ be a sequence of independent random variables such that $\mathbb{E}[|X_i|] < \infty$ for all $i \geq 1$. For all $n \geq 1$, set $Y_n = \prod_{i=1}^n X_i$.
+
+\begin{enumerate}
+    \item[(a)] Using Q3, prove that, for all $n \geq 1$, $Y_n = \prod_{i=1}^n X_i$ is $\sigma(X_1, \ldots, X_n)$-measurable, and deduce that $\sigma(Y_n) \subset \sigma(X_1, \ldots, X_n)$.
+    
+    \item[(b)] Fix $n \geq 1$ and let
+    \[
+    \mathcal{C} = \left\{ \bigcap_{i=1}^n \{X_i \in B_i\} : B_1, \ldots, B_n \in \mathcal{B}(\mathbb{R}) \right\}.
+    \]
+    Show that $\mathcal{C}$ is a $\pi$-system (see Q4).
+    
+    \item[(c)] Show that, for all $A \in \sigma(X_{n+1})$ and $C \in \mathcal{C}$, $\mathbb{P}(A \cap C) = \mathbb{P}(A)\mathbb{P}(C)$.
+    
+    \item[(d)] Use Q2 to conclude that, for all $A \in \sigma(X_{n+1})$ and $C \in \sigma(X_1, \ldots, X_n)$, $\mathbb{P}(A \cap C) = \mathbb{P}(A)\mathbb{P}(C)$.
+    
+    \item[(e)] Deduce that, for all $n \geq 1$, $Y_n$ and $X_{n+1}$ are independent.
+    
+    \item[(f)] By induction on $n$, prove that, for all $n \geq 1$,
+    \[
+    \mathbb{E} \left[ \prod_{i=1}^n X_i \right] = \prod_{i=1}^n \mathbb{E}[X_i]. \tag{2}
+    \]
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+Let $p \in (0,1)$. Let $X$ and $Y$ be two independent random variables on a probability space $(\Omega, \mathcal{A}, \mathbb{P})$, such that
+\[
+\mathbb{P}(X = 1) = \mathbb{P}(Y = 1) = p \quad \text{and} \quad \mathbb{P}(X = -1) = \mathbb{P}(Y = -1) = 1 - p.
+\]
+
+\begin{enumerate}
+    \item[(a)] Let $A \in \mathcal{A}$ be an event. Give the formula for $\mathbb{E}[X \mid \sigma(A)]$ in terms of $\mathbb{E}[X \mid A]$ and $\mathbb{E}[X \mid A^c]$.
+    
+    \item[(b)] Show that $\mathbb{E}[X \mid X + Y = 0] = 0$.
+    
+    \item[(c)] Show that
+    \[
+    \mathbb{E}[X \mid X + Y \neq 0] = \frac{2p - 1}{p^2 + (1 - p)^2}.
+    \]
+    
+    \item[(d)] Let $\mathcal{F}$ be the sub-$\sigma$-algebra generated by the event $\{X + Y = 0\}$. Calculate $\mathbb{E}[X \mid \mathcal{F}]$.
+    
+    \item[(e)] Calculate $\mathbb{E}[Y \mid \mathcal{F}]$. Are the random variables $\mathbb{E}[X \mid \mathcal{F}]$ and $\mathbb{E}[Y \mid \mathcal{F}]$ independent?\\
+    \textit{(Hint: be aware that the answer might depend on the value of $p$.)}
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+Let $X$ and $Y$ be two random variables such that $\mathbb{E}[|X|] < \infty$ and $\mathbb{E}[|Y|] < \infty$. Assume that
+\[
+\mathbb{E}[X \mid Y] = Y \text{ a.s. and } \mathbb{E}[Y \mid X] = X \text{ a.s.}
+\]
+
+\begin{enumerate}
+    \item[(a)] Prove that, for all $c \in \mathbb{Q}$, $\mathbb{E}[(X - Y) \mathbf{1}_{Y \leq c}] = 0$.
+    
+    \item[(b)] Deduce that, for all $c \in \mathbb{Q}$, $\mathbb{E}[(X - Y) \mathbf{1}_{\{X \leq c\} \cap \{Y \leq c\}}] \leq 0$.
+    
+    \item[(c)] Using the symmetry of $X$ and $Y$, deduce that, for all $c \in \mathbb{Q}$, 
+    \[
+    \mathbb{E}[(X - Y) \mathbf{1}_{\{X \leq c\} \cap \{Y \leq c\}}] = 0.
+    \]
+    
+    \item[(d)] Deduce that, for all $c \in \mathbb{Q}$, $\mathbb{P}(X > c \text{ and } Y \leq c) = 0$.
+    
+    \item[(e)] Deduce that $X = Y$ almost surely.
+\end{enumerate}
+\end{exercise}
+\begin{exercise}
+Assume that we toss $n$ fair coins and $N$ of them come up as heads. Suppose we then roll $N$ fair dice. Let $T$ be the sum of the values obtained on the $N$ dice. Express $\mathbb{E}[T|N]$ as a function of $N$, and then express $\mathbb{E}[T]$ and $\mathbb{E}[NT]$, both as functions of $n$.
+\end{exercise}
+\end{document}
