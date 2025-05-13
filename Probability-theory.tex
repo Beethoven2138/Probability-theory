@@ -35,6 +35,12 @@
 \begin{exercise}
 Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space, and let $A_1,...,A_n$ be measurable sets. Prove by induction that\[\mathbb{P}(\bigcup_{i=1}^nA_i)\geq\sum_{i=1}^n\mathbb{P}(A_i)-\sum_{1\leq i < j\leq n}\mathbb{P}(A_i\cap A_j).\]
 \end{exercise}
+\begin{proof}
+For $n=1$, \[\mathbb{P}\left(\bigcup_{i=1}^n A_i\right)=\mathbb{P}(A_1)\geq\sum_{i=1}^n\mathbb{P}(A_i)-\sum_{1\leq i < j\leq n}\mathbb{P}(A_i\cap A_j)=\mathbb{P}(A_1).\] Now assume true for $n=k$. Then for $n=k+1$ we have\begin{align*}
+\mathbb{P}\left(\bigcup_{i=1}^{k+1}A_i\right)&=\mathbb{P}\left(A_{k+1}\cup\bigcup_{i=1}^{k}A_i\right)\\&=\mathbb{P}(A_{k+1})+\mathbb{P}\left(\bigcup_{i=1}^{k}A_i\right)-\mathbb{P}\left(\bigcup_{i=1}^{k}(A_i\cap A_{k+1})\right)\\&\geq\mathbb{P}(A_{k+1})+\sum_{i=1}^k\mathbb{P}(A_i)-\sum_{1\leq i<j\leq k}\mathbb{P}(A_i\cap A_j)-\mathbb{P}\left(\bigcup_{i=1}^{k}(A_i\cap A_{k+1})\right)\\&\geq\sum_{i=1}^{k+1}\mathbb{P}(A_i)-\sum_{1\leq i<j\leq k}\mathbb{P}(A_i\cap A_j)-\sum_{i=1}^k\mathbb{P}(A_i\cap A_{k+1})\\&=\sum_{i=1}^{k+1}\mathbb{P}(A_i)-\sum_{1\leq i<j\leq k+1}\mathbb{P}(A_i\cap A_j).
+\end{align*}
+Hence the result holds by induction.
+\end{proof}
 
 \begin{exercise}
 Suppose $(\Omega,\mathcal{A},\mathbb{P})$ is a probability space and $X:\Omega\to[0,\infty)$ is a non-negative random variable.
@@ -42,9 +48,16 @@ Suppose $(\Omega,\mathcal{A},\mathbb{P})$ is a probability space and $X:\Omega\t
     \item[(a)] Let $A_n=\{\omega\in\Omega:X(\omega)\leq n\}$. Prove that $\mathbb{E}[X\mathbf{1}_{A_n
     }]\to\mathbb{E}[X]$ as $n\to\infty$.
     \item[(b)] Prove that if $\mathbb{E}[X]<\infty$, then $\mathbb{E}[X\mathbf{1}_{A_n^c}]\to0$ as $n\to\infty$.
-    \item[(c)] Suppose $\mathbb{E}[X]<\infty$. Prove that\[\lim_{\delta\downarrow0}\sup_{\{A\in\mathcal{F}:\mathbb{P}(A)<\delta\}}\mathbb{E}[X\mathbf{1}_A]=0,\]that is, given $\epsilon > 0$ there exists a $\delta >0$ such that for all $A\in\mathbf{A}$ with $\mathbb{P}(A)<\delta$, we have $\mathbb{E}[X\mathbf{1}_A]<\epsilon$.
+    \item[(c)] Suppose $\mathbb{E}[X]<\infty$. Prove that\[\lim_{\delta\downarrow0}\sup_{\{A\in\mathcal{F}:\mathbb{P}(A)<\delta\}}\mathbb{E}[X\mathbf{1}_A]=0.\]
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] $0\leq X\mathbf{1}_{A_n}\uparrow X$ so apply the monotone convergence theorem.
+    \item[(b)] $\mathbb{E}[X\mathbf{1}_{A_n}]+\mathbb{E}[X\mathbf{1}_{A_n^c}]=\mathbb{E}[X]\forall n$ so $\lim_{n\to\infty}\mathbb{E}[X\mathbf{1}_{A_n^c}]=\mathbb{E}[X]-\lim_{n\to\infty}\mathbb{E}[X\mathbf{1}_{A_n}]=0$.
+    \item[(c)] Let $(\delta_n)_{n\in\mathbb{N}}$ be a sequence such that $\delta_n\downarrow0$. We want to show that given an $\epsilon > 0$ there exists an $N\in\mathbb{N}$ such that $\forall n>N$ we have\[\sup_{\{A\in\mathcal{F}:\mathbb{P}(A)<\delta_n\}}\mathbb{E}[X\mathbf{1}_A]<\epsilon.\] To do so, we instead show that there exists an $N\in\mathbb{N}$ such that $\forall n>N$ we have\[\mathbb{E}[X\mathbf{1}_A]<\frac{\epsilon}{2}\forall A\in\mathcal{F}:\mathbb{P}(A)<\delta_n,\] which would imply that \[\sup_{\{A\in\mathcal{F}:\mathbb{P}(A)<\delta_n\}}\mathbb{E}[X\mathbf{1}_A]\leq\frac{\epsilon}{2}<\epsilon.\] By part (b) there exists an $M\in\mathbb{N}$ such that \[\mathbb{E}[X\mathbf{1}_{\{ X>M\}}]<\frac{\epsilon}{4}.\] Let $N\in\mathbb{N}$ be such that $\delta_n<\frac{\epsilon}{4M}\forall n>N$. Then if $A\in\mathcal{F}$ is such that $\mathbb{P}(A)<\delta_n$, we have that\[X\mathbf{1}_A=X\mathbf{1}_{A\cap \{X>M\}}+X\mathbf{1}_{A\cap \{X\leq M\}}\]so\begin{align*}\mathbb{E}[X\mathbf{1}_A]&\leq \mathbb{E}[X\mathbf{1}_{\{X>M\}}]+\mathbb{E}[X\mathbf{1}_{A\cap\{X\leq M\}}]\\&<\frac{\epsilon}{4}+M\mathbb{P}(A)\\&<\frac{\epsilon}{4}+\frac{M\epsilon}{4M}=\frac{\epsilon}{2},\end{align*} as required.
+\end{enumerate}
+\end{proof}
 
 \begin{exercise}
 Let $\Omega=\{1,2,3,4,5,6\}$ with $\mathcal{A}=\mathcal{P}(\Omega)$ and let $\mathcal{C}=\{A,B\}$ with $A=\{1,2,3,4\}$ and $B=\{3,4,5\}$. What are the sets of $\sigma(\mathcal{C})$?
