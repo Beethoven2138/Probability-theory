@@ -88,6 +88,12 @@ Let $(\Omega,\mathcal{A},\mathbb{P})$ be a probability space. Suppose that $\mat
     \item[(b)] Does the conclusion still hold if $\mathcal{C}=\{A_1,A_2,...\}$ and $\mathcal{B}=\{B_1,B_2,...\}$ are countably infinite partitions of $\Omega$ but otherwise things are as described above? Explain briefly.
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] Let $A\in\sigma(\mathcal{C})$ and $B\in\sigma(\mathcal{B})$. Then $A=\bigcup_{i\in I}A_i$ and $B=\bigcup_{j\in J}B_j$ for some \[I\subseteq\{1,...,n\},J\subseteq\{1,...,m\}.\] Hence \begin{align*}\mathbb{P}(A\cap B)&=\mathbb{P}\left(\bigcup_{i\in I}A_i\cap\bigcup_{j\in J}B_j\right)\\&=\mathbb{P}\left(\bigcup_{i\in I}\left(A_i\cap \bigcup_{j\in J}B_j\right)\right)\\&=\sum_{i\in I}\mathbb{P}\left(A_i\cap\bigcup_{j\in J}B_j\right)\\&=\sum_{i\in I}\mathbb{P}\left(\bigcup_{j\in J}(A_i\cap B_j)\right)\\&=\sum_{i\in I}\sum_{j\in J}\mathbb{P}(A_i\cap B_j)\\&=\sum_{i\in I}\sum_{j\in J}\mathbb{P}(A_i)\mathbb{P}(B_j)\\&=\left(\sum_{i\in I}\mathbb{P}(A_i)\right)\left(\sum_{j\in J}\mathbb{P}(B_j)\right)\\&=\mathbb{P}(A)\mathbb{P}(B).\end{align*}
+    \item[(b)] Yes, since the argument still holds with countably infinite indexes.
+\end{enumerate}
+\end{proof}
 
 \begin{exercise}
 \begin{enumerate}
@@ -96,6 +102,15 @@ Let $(\Omega,\mathcal{A},\mathbb{P})$ be a probability space. Suppose that $\mat
     \item[(c)] Suppose $X$ is a random variable with $\mathbb{E}[X]=\mu$ and $\text{Var}(X)=0$. Prove that $\mathbb{P}(X=\mu)=1$.
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] \begin{align*}
+        \mathbb{P}(X\geq a)&=\mathbb{E}[\mathbf{1}_{X\geq a}]\\&\leq\mathbb{E}\left[\frac{X}{a}\mathbf{1}_{X\geq a}\right]\\&\leq a^{-1}\mathbb{E}[X].
+    \end{align*}
+    \item[(b)] Let $\epsilon > 0$. Then $\mathbb{P}(X\geq\epsilon)\leq\epsilon^{-1}\cdot\mathbb{E}[X]=0$. $\epsilon$ is arbitrary so $\mathbb{P}(X>0)=\mathbb{P}(X\neq 0)=0$. Hence $\mathbb{P}(X=0)=1$.
+    \item[(c)] $\text{Var}(X)=\mathbb{E}[(X-\mu)^2]=0$ so $\mathbb{P}((X-\mu)^2=0)=\mathbb{P}(X=\mu)=1$.
+\end{enumerate}
+\end{proof}
 
 \begin{exercise}
 Let $X$ and $Y$ be random variables on the same probability space $(\Omega,\mathcal{F},\mathbb{P})$.
