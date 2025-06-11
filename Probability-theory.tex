@@ -125,6 +125,18 @@ Let $X$ and $Y$ be random variables on the same probability space $(\Omega,\math
     \end{itemize}
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] $(-\infty,t)$ is a Borel set $\forall t$ so $\mathcal{C}\subseteq\sigma(X)$, and hence $\sigma(\mathcal{C})\subseteq\sigma(X)$. $\mathcal{B}=\sigma(\mathcal{I})$, where $\mathcal{I}:=\{(-\infty,t):t\in\mathbb{R}\}$. Let $\mathcal{M}:=\{A\in\mathcal{B}:X^{-1}(A)\in\sigma(\mathcal{C})\}$. Clearly $\mathcal{I}\subseteq\mathcal{M}$. Let $A_1,A_2,...\in\mathcal{M}$. Then $X^{-1}(\bigcup_{i=1}^\infty A_i)=\bigcup_{i=1}^\infty X^{-1}(A_i)\in\sigma(\mathcal{C})$, since $\sigma(\mathcal{C})$ is a $\sigma$-algebra. Hence $\bigcup_{i=1}^\infty A_i\in\mathcal{M}$. Furthermore, $X^{-1}(\emptyset)=\emptyset\in\sigma(\mathcal{C})$ so $\emptyset\in\mathcal{M}$. Finally, Let $A\in\mathcal{M}$. Then $X^{-1}(A^c)=X^{-1}(A)^c\in\sigma(\mathcal{C})$ so $A^c\in\mathcal{M}$. Hence $\mathcal{M}$ is a $\sigma$-algebra so contains $\sigma(\mathcal{I})=\mathcal{B}$; that is, $X^{-1}(A)\in\sigma(\mathcal{C})\forall A\in\mathcal{B}$, so $\sigma(X)\subseteq\sigma(\mathcal{C})$. Hence $\sigma(X)=\sigma(\mathcal{C})$.
+    \item[(b)] $\{X<t\}\cap\{X<s\}=\{X<\min(t,s)\}\in\mathcal{C}$.
+    \item[(c)]
+    \begin{itemize}
+        \item[1.] $\mu_A$ and $\mu'_A$ agree on $\mathcal{C}'$, and $\mathcal{C}'$ is a $\pi$-system, so $\mu_A$ and $\mu'_A$ agree on $\sigma(\mathcal{C}')$ by the uniqueness lemma.
+        \item[2.] $\nu_B$ and $\nu'_B$ agree on $\mathcal{C}$ by the above, and $\mathcal{C}$ is a $\pi$-system, so $\nu_B$ and $\nu'_B$ agree on $\sigma(\mathcal{C})$ by the uniqueness lemma.
+        \item[3.] We have shown that $\mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B)\forall A\in\sigma(\mathcal{C}),B\in\sigma(\mathcal{C}')$, and hence \[\mathbb{P}(A\cap B)=\mathbb{P}(A)\mathbb{P}(B)\forall A\in\sigma(X),B\in\sigma(Y),\] since $\sigma(\mathcal{C})=\sigma(X),\sigma(\mathcal{C}')=\sigma(Y)$. Thus $X$ and $Y$ are independent.
+    \end{itemize}
+\end{enumerate}
+\end{proof}
 
 \begin{exercise}
 Let $\mathcal{F}$ be a sub-$\sigma$-algebra. Let $U$ and $V$ be two $\mathcal{F}$-measurable random variables.
