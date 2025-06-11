@@ -145,6 +145,13 @@ Let $\mathcal{F}$ be a sub-$\sigma$-algebra. Let $U$ and $V$ be two $\mathcal{F}
     \item[(b)] Show that $UV$ is $\mathcal{F}$-measurable.
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] $\{U+V<t\}=\bigcup_{s\in\mathbb{R}}\{U<s\}\cap\{V<t-s\}$. Furthermore, if $U(\omega)<s$ and $V(\omega)<t-s$ for some $s\in\mathbb{R}$, by the density of $\mathbb{Q}$ in $\mathbb{R}$ there will be some $q\in\mathbb{Q}$ such that $U(\omega)<q<s$ and hence $V(\omega)<t-s<t-q$, so $\omega\in\{U<q\}\cap\{V<t-q\}$. This is true for all $\omega\in\{U+V<t\}$ so $\{U+V<t\}\subseteq\bigcup_{q\in\mathbb{Q}}\{U<q\}\cap\{V<t-q\}$. The reverse inclusion clearly holds so \[\{U+V<t\}=\bigcup_{q\in\mathbb{Q}}\{U<q\}\cap\{V<t-q\}\in\mathcal{F}.\] Hence $U+V$ is $\mathcal{F}$-measurable.
+    \item[(b)] Let $X$ be an $\mathcal{F}$-measurable random variable. Then $\{X^2<t\}=\{-\sqrt{t}<X<\sqrt{t}\}\in\mathcal{F}$ if $t\geq 0$, and $\{X^2<t\}=\emptyset\in\mathcal{F}$ otherwise. Hence $X^2$ is $\mathcal{F}$-measurable.
+    Hence $UV=\frac{(U+V)^2-(U-V)^2}{4}$ is $\mathcal{F}$-measurable.
+\end{enumerate}
+\end{proof}
 \begin{exercise}
 Let $(X_i)_{i \geq 1}$ be a sequence of independent random variables such that $\mathbb{E}[|X_i|] < \infty$ for all $i \geq 1$. For all $n \geq 1$, set $Y_n = \prod_{i=1}^n X_i$.
 
