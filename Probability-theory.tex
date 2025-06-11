@@ -156,17 +156,17 @@ Let $\mathcal{F}$ be a sub-$\sigma$-algebra. Let $U$ and $V$ be two $\mathcal{F}
 Let $(X_i)_{i \geq 1}$ be a sequence of independent random variables such that $\mathbb{E}[|X_i|] < \infty$ for all $i \geq 1$. For all $n \geq 1$, set $Y_n = \prod_{i=1}^n X_i$.
 
 \begin{enumerate}
-    \item[(a)] Using Q3, prove that, for all $n \geq 1$, $Y_n = \prod_{i=1}^n X_i$ is $\sigma(X_1, \ldots, X_n)$-measurable, and deduce that $\sigma(Y_n) \subset \sigma(X_1, \ldots, X_n)$.
+    \item[(a)] Prove that, for all $n \geq 1$, $Y_n = \prod_{i=1}^n X_i$ is $\sigma(X_1, \ldots, X_n)$-measurable, and deduce that $\sigma(Y_n) \subset \sigma(X_1, \ldots, X_n)$.
     
     \item[(b)] Fix $n \geq 1$ and let
     \[
     \mathcal{C} = \left\{ \bigcap_{i=1}^n \{X_i \in B_i\} : B_1, \ldots, B_n \in \mathcal{B}(\mathbb{R}) \right\}.
     \]
-    Show that $\mathcal{C}$ is a $\pi$-system (see Q4).
+    Show that $\mathcal{C}$ is a $\pi$-system.
     
     \item[(c)] Show that, for all $A \in \sigma(X_{n+1})$ and $C \in \mathcal{C}$, $\mathbb{P}(A \cap C) = \mathbb{P}(A)\mathbb{P}(C)$.
     
-    \item[(d)] Use Q2 to conclude that, for all $A \in \sigma(X_{n+1})$ and $C \in \sigma(X_1, \ldots, X_n)$, $\mathbb{P}(A \cap C) = \mathbb{P}(A)\mathbb{P}(C)$.
+    \item[(d)] Conclude that, for all $A \in \sigma(X_{n+1})$ and $C \in \sigma(X_1, \ldots, X_n)$, $\mathbb{P}(A \cap C) = \mathbb{P}(A)\mathbb{P}(C)$.
     
     \item[(e)] Deduce that, for all $n \geq 1$, $Y_n$ and $X_{n+1}$ are independent.
     
@@ -176,6 +176,16 @@ Let $(X_i)_{i \geq 1}$ be a sequence of independent random variables such that $
     \]
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] $\sigma(X_i)\subseteq\sigma(X_1,...,X_n)\forall i$ so each $X_i$ is $\sigma(X_1,...,X_n)$-measurable. The product of measurable functions is measurable so $Y_n$ is $\sigma(X_1,...,X_n)$-measurable. It clearly follows that $\sigma(Y_n)\subseteq\sigma(X_1,...,X_n)$.
+    \item[(b)] Let $A_1,...,A_n,B_1,...,B_n\in\mathcal{B}$. Then\[\bigcap_{i=1}^n\{X_i\in A_i\}\cap\bigcap_{i=1}^n\{X_i\in B_i\}=\bigcap_{i=1}^n\{X_i\in A_i\cap B_i\}\in\mathcal{C}.\]
+    \item[(c)] Let $A=\{X_{n+1}\in B_{n+1}\}$ and let $C=\bigcap_{i=1}^n\{X_i\in B_i\}$ for some $B_1,...,B_{n+1}\in\mathcal{B}$. Then by independence we have \begin{align*}\mathbb{P}(A\cap C)&=\mathbb{P}(\bigcap_{i=1}^{n+1}\{X_i\in B_i\})\\&=\prod_{i=1}^{n+1}\mathbb{P}(X_i\in B_i)\\&=\mathbb{P}(A)\prod_{i=1}^n\mathbb{P}(X_i\in B_i)\\&=\mathbb{P}(A)\mathbb{P}(\bigcap_{i=1}^n\{X_i\in B_i\})\\&=\mathbb{P}(A)\mathbb{P}(C).\end{align*}
+    \item[(d)] First note that $\sigma(X_i)\subseteq\mathcal{C}\forall i\in\{1,..,n\}$ so $\sigma(X_1)\cup...\cup\sigma(X_n)\subseteq\mathcal{C}$, and hence $\sigma(X_1,...,X_n)\subseteq\sigma(\mathcal{C})$, and furthermore that $\mathcal{C}\subseteq\sigma(X_1,...,X_n)$ so $\sigma(\mathcal{C})=\sigma(X_1,...,X_n)$. $\mathcal{C}$ is a $\pi$-system so apply the uniqueness lemma to the measures $\nu_A:\sigma(X_1,...,X_n)\to\mathbb{R}:C\mapsto\mathbb{P}(A\cap C)$ and $\nu_A':\sigma(X_1,...,X_n)\to\mathbb{R}:C\mapsto\mathbb{P}(A)\mathbb{P}(C)$ for every $A\in\sigma(X_{n+1})$.
+    \item[(e)] Let $A\in\sigma(X_{n+1})$ and $C\in\sigma(Y_n)$. $\sigma(Y_n)\subseteq\sigma(X_1,...,X_n)$ so $\mathbb{P}(A\cap C)=\mathbb{P}(A)\mathbb{P}(C)$. Hence $Y_n$ and $X_{n+1}$ are independent.
+    \item[(f)] The base case is clear. Assume true for $n=k$:\[\mathbb{E}\left[\prod_{i=1}^k X_i\right]=\prod_{i=1}^k\mathbb{E}[X_i].\] For $n=k+1$, we have that $X_{k+1}$ and $\prod_{i=1}^k X_i$ are independent so\[\mathbb{E}\left[\prod_{i=1}^{k+1}X_i\right]=\mathbb{E}\left[X_{k+1}\prod_{i=1}^kX_i\right]=\mathbb{E}[X_{k+1}]\mathbb{E}\left[\prod_{i=1}^kX_i\right]=\mathbb{E}[X_{k+1}]\prod_{i=1}^k\mathbb{E}[X_i]=\prod_{i=1}^{k+1}\mathbb{E}[X_i].\]
+\end{enumerate}
+\end{proof}
 \begin{exercise}
 Let $p \in (0,1)$. Let $X$ and $Y$ be two independent random variables on a probability space $(\Omega, \mathcal{A}, \mathbb{P})$, such that
 \[
