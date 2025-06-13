@@ -208,6 +208,25 @@ Let $p \in (0,1)$. Let $X$ and $Y$ be two independent random variables on a prob
     \textit{(Hint: be aware that the answer might depend on the value of $p$.)}
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] $\sigma(A)=\{A,A^c\}$. Hence \[\mathbb{E}[X|\sigma(A)]=\mathbb{E}[X|A]\mathbf{1}_A+\mathbb{E}[X|A^c]\mathbf{1}_{A^c}\] almost surely. To see this, first note that $\mathbb{E}[X|A]\mathbf{1}_A+\mathbb{E}[X|A^c]\mathbf{1}_{A^c}$ is $\sigma(A)$-measurable, and furthermore \begin{align*}\mathbb{E}[(\mathbb{E}[X|A]\mathbf{1}_A+\mathbb{E}[X|A^c]\mathbf{1}_{A^c})\mathbf{1}_A]&=\mathbb{E}[\mathbb{E}[X|A]\mathbf{1}_A]\\&=\mathbb{E}\left[\frac{\mathbb{E}[X\mathbf{1}_A]}{\mathbb{P}(A)}\mathbf{1}_A\right]\\&=\mathbb{E}[X\mathbf{1}_A],\end{align*} and similarly \[\mathbb{E}[(\mathbb{E}[X|A]\mathbf{1}_A+\mathbb{E}[X|A^c]\mathbf{1}_{A^c})\mathbf{1}_{A^c}]=\mathbb{E}[X\mathbf{1}_{A^c}].\]
+    \item[(b)] \[\mathbb{E}[X|X+Y=0]=\frac{\mathbb{E}[X\mathbf{1}_{X+Y=0}]}{\mathbb{P}(X+Y=0)}.\]Since \[\{X+Y=0\}=\{X=1,Y=-1\}\sqcup\{X=-1,Y=1\}\] it follows that\begin{align*}
+    \mathbb{E}[X\mathbf{1}_{X+Y=0}]&=\mathbb{P}(X=1,Y=-1)-\mathbb{P}(X=-1,Y=1)\\&=p(1-p)-(1-p)p=0.
+    \end{align*}Hence\[\mathbb{E}[X|X+Y=0]=0.\]
+    \item[(c)] \[\mathbb{E}[X|X+Y\neq0]=\frac{\mathbb{E}[X\mathbf{1}_{X+Y\neq0}]}{\mathbb{P}(X+Y\neq0)}.\] Since\[\{X+Y\neq0\}=\{X=1,Y=1\}\sqcup\{X=-1,Y=-1\},\] it follows that\begin{align*}
+    \mathbb{E}[X\mathbf{1}_{X+Y\neq0}]&=\mathbb{P}(X=1,Y=1)-\mathbb{P}(X=-1,Y=-1)\\&=p^2-(1-p)^2\\&=p^2-1+2p-p^2=2p-1
+    \end{align*}and\begin{align*}
+    \mathbb{P}(X+Y\neq0)&=\mathbb{P}(X=1,Y=1)+\mathbb{P}(X=-1,Y=-1)\\&=p^2+(1-p)^2.
+    \end{align*}
+    Hence\[\mathbb{E}[X|X+Y\neq0]=\frac{2p-1}{p^2+(1-p)^2}.\]
+    \item[(d)] \[\mathbb{E}[X|\mathcal{F}]=\frac{2p-1}{p^2+(1-p)^2}\mathbf{1}_{X+Y\neq0}.\]
+    \item[(e)] \[\mathbb{E}[Y|\mathcal{F}]=\mathbb{E}[X|\mathcal{F}]\] by symmetry.
+    First suppose that $\frac{2p-1}{p^2+(1-p)^2}\neq 0$.\[\mathbb{P}\left(\mathbb{E}[X|\mathcal{F}]=\frac{2p-1}{p^2+(1-p)^2},\mathbb{E}[Y|\mathcal{F}]=\frac{2p-1}{p^2+(1-p)^2}\right)=\mathbb{P}(X+Y\neq0)=p^2+(1-p)^2.\]and\[\mathbb{P}\left(\mathbb{E}[X|\mathcal{F}]=\frac{2p-1}{p^2+(1-p)^2}\right)\mathbb{P}\left(\mathbb{E}[Y|\mathcal{F}]=\frac{2p-1}{p^2+(1-p)^2}\right)=\mathbb{P}(X+Y\neq0)^2=(p^2+(1-p)^2)^2.\] Hence in order to have independence we need\begin{align*}&p^2+(1-p)^2=(p^2+(1-p)^2)^2\\\iff &p^2+(1-p)^2=1\\\iff &p^2-p=0\\\iff &p\in\{0,1\}.\end{align*}
+    Now suppose $\frac{2p-1}{p^2+(1-p)^2}=0$. Then $\mathbb{E}[Y|\mathcal{F}]=\mathbb{E}[X|\mathcal{F}]=0$ almost surely so are independent. The only value of $p$ which gives this is $p=\frac{1}{2}$.
+\end{enumerate}
+\end{proof}
+
 \begin{exercise}
 Let $X$ and $Y$ be two random variables such that $\mathbb{E}[|X|] < \infty$ and $\mathbb{E}[|Y|] < \infty$. Assume that
 \[
