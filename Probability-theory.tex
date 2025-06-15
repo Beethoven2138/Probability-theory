@@ -248,6 +248,18 @@ Let $X$ and $Y$ be two random variables such that $\mathbb{E}[|X|] < \infty$ and
     \item[(e)] Deduce that $X = Y$ almost surely.
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] \[\mathbb{E}[(X-Y)\mathbf{1}_{Y\leq c}]=\mathbb{E}[X\mathbf{1}_{Y\leq c}]-\mathbb{E}[Y\mathbf{1}_{Y\leq c}]=\mathbb{E}[X\mathbf{1}_{Y\leq c}]-\mathbb{E}[\mathbb{E}[X|Y]\mathbf{1}_{Y\leq c}].\]Since \[\{Y\leq c\}\in\sigma(Y)\] it follows that \[\mathbb{E}[\mathbb{E}[X|Y]\mathbf{1}_{Y\leq c}]=\mathbb{E}[X\mathbf{1}_{Y\leq c}]\] so \[\mathbb{E}[(X-Y)\mathbf{1}_{Y\leq c}]=0.\]
+    \item[(b)] \begin{align*}
+        \mathbb{E}[(X-Y)\mathbf{1}_{\{X\leq c\}\cap\{Y\leq c\}}]&=\mathbb{E}[(X-Y)\mathbf{1}_{\{Y\leq c\}}]-\mathbb{E}[(X-Y)\mathbf{1}_{\{X> c\}\cap\{Y\leq c\}}]\\&=-\mathbb{E}[(X-Y)\mathbf{1}_{\{X> c\}\cap\{Y\leq c\}}]\leq 0.
+    \end{align*}
+    \item[(c)] It follows from symmetry that \[\mathbb{E}[(Y-X)\mathbf{1}_{\{X\leq c\}\cap\{Y\leq c\}}]\leq0\] so \[\mathbb{E}[(X-Y)\mathbf{1}_{\{X\leq c\}\cap\{Y\leq c\}}]\geq 0\], and hence \[\mathbb{E}[(X-Y)\mathbf{1}_{\{X\leq c\}\cap\{Y\leq c\}}]=0.\]
+    \item[(d)] \[\mathbb{E}[(X-Y)\mathbf{1}_{\{X\leq c\}\cap\{Y\leq c\}}]+\mathbb{E}[(X-Y)\mathbf{1}_{\{X>c\}\cap\{Y\leq c\}}]=\mathbb{E}[(X-Y)\mathbf{1}_{\{Y\leq c\}}]=0\]so\[\mathbb{E}[(X-Y)\mathbf{1}_{\{X>c\}\cap\{Y\leq c\}}]=0.\]Since\[(X-Y)\mathbf{1}_{\{X>c\}\cap\{Y\leq c\}}\geq0,\] it follows that \[(X-Y)\mathbf{1}_{\{X>c\}\cap\{Y\leq c\}}=0\] almost surely. That is,\[\mathbb{P}((X-Y)\mathbf{1}_{\{X>c\}\cap\{Y\leq c\}}>0)=\mathbb{P}(X>c,Y\leq c)=0.\]
+    \item[(e)] \[\{X\neq Y\}=\bigcup_{c\in \mathbb{Q}}\{X>c,Y\leq c\}\cup\bigcup_{c\in\mathbb{Q}}\{Y>c,X\leq c\}.\]Hence,\[\mathbb{P}(X\neq Y)=\sum_{c\in\mathbb{Q}}\mathbb{P}(X>c,Y\leq c)+\sum_{c\in\mathbb{Q}}\mathbb{P}(Y>c,X\leq c)=0\] so\[X=Y\] almost surely.
+\end{enumerate}
+\end{proof}
+
 \begin{exercise}
 Assume that we toss $n$ fair coins and $N$ of them come up as heads. Suppose we then roll $N$ fair dice. Let $T$ be the sum of the values obtained on the $N$ dice. Express $\mathbb{E}[T|N]$ as a function of $N$, and then express $\mathbb{E}[T]$ and $\mathbb{E}[NT]$, both as functions of $n$.
 \end{exercise}
