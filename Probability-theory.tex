@@ -263,4 +263,11 @@ Let $X$ and $Y$ be two random variables such that $\mathbb{E}[|X|] < \infty$ and
 \begin{exercise}
 Assume that we toss $n$ fair coins and $N$ of them come up as heads. Suppose we then roll $N$ fair dice. Let $T$ be the sum of the values obtained on the $N$ dice. Express $\mathbb{E}[T|N]$ as a function of $N$, and then express $\mathbb{E}[T]$ and $\mathbb{E}[NT]$, both as functions of $n$.
 \end{exercise}
+\begin{proof}
+\[\sigma(N)=\{\bigcup_{i\in I}\{N=i\}:I\subseteq\{0,...,n\},\] with \[\{N=0\},...,\{N=n\}\] being a partition of $\Omega$, and hence\begin{align*}\mathbb{E}[T|N]&=\sum_{i=0}^n\mathbb{E}[T|N=i]\mathbf{1}_{N=i}\\&=\sum_{i=0}^n3.5i\mathbf{1}_{N=i}\\&=3.5N.\end{align*}
+
+Next,\[\mathbb{E}[T]=\mathbb{E}[T|N]=3.5\mathbb{E}[N]=3.5\cdot\frac{1}{2}n=1.75n.\]
+
+Finally, \[\mathbb{E}[NT|N]=N\mathbb{E}[T|N]=3.5N^2.\] Hence\begin{align*}\mathbb{E}[NT]&=\mathbb{E}[\mathbb{E}[NT|N]]\\&=\mathbb{E}[3.5N^2]\\&=3.5\sum_{i=0}^ni^2\mathbb{P}(N=i)\\&=3.5\sum_{i=0}^ni^2{{n}\choose{i}}\frac{1}{2}^i\frac{1}{2}^{n-i}\\&=\frac{3.5}{2^n}\sum_{i=0}^ni^2{{n}\choose{i}}.\end{align*}
+\end{proof}
 \end{document}
