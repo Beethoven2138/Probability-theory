@@ -270,4 +270,34 @@ Next,\[\mathbb{E}[T]=\mathbb{E}[T|N]=3.5\mathbb{E}[N]=3.5\cdot\frac{1}{2}n=1.75n
 
 Finally, \[\mathbb{E}[NT|N]=N\mathbb{E}[T|N]=3.5N^2.\] Hence\begin{align*}\mathbb{E}[NT]&=\mathbb{E}[\mathbb{E}[NT|N]]\\&=\mathbb{E}[3.5N^2]\\&=3.5\sum_{i=0}^ni^2\mathbb{P}(N=i)\\&=3.5\sum_{i=0}^ni^2{{n}\choose{i}}\frac{1}{2}^i\frac{1}{2}^{n-i}\\&=\frac{3.5}{2^n}\sum_{i=0}^ni^2{{n}\choose{i}}.\end{align*}
 \end{proof}
+
+\begin{exercise}
+The aim of this question is to prove that, if \(X\) and \(Y\) are independent random variables and that both \(X\) and \(Y\) are in \(L^1\) (i.e. \(\mathbb{E}[|X|] < \infty\) and \(\mathbb{E}[|Y|] < \infty\)), then
+\[
+XY \in L^1 \quad \text{and} \quad \mathbb{E}[XY] = \mathbb{E}[X] \mathbb{E}[Y]. \tag{1}
+\]
+In particular, if \(X\) and \(Y\) are independent random variables in \(L^2\), then
+\[
+\text{Cov}(X,Y) = 0 \quad \text{and} \quad \text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y).
+\]
+
+(Note that, without the independence assumption, in general \(X, Y \in L^1\) does \emph{not} imply \(XY \in L^1\).)
+
+\begin{itemize}
+    \item[(a)] Prove (1) under the assumption that \(X\) and \(Y\) are non-negative and bounded, i.e. there exists some \(K\) such that \(0 \leq X \leq K\) and \(0 \leq Y \leq K\) almost surely.
+    \item[(b)] Prove (1) under the assumption that \(X\) and \(Y\) are non-negative. (Hint: set \(X_n = \min(X, n)\) and \(Y_n = \min(Y, n)\), for all \(n \geq 1\).)
+    \item[(c)] Prove (1) in full generality.
+\end{itemize}
+\end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] \[\mathbb{E}[XY]\leq\mathbb{E}[KY]=K\mathbb{E}[Y]<\infty\] so \[XY\in L^1.\]
+    Hence,\[\mathbb{E}[XY]=\mathbb{E}[\mathbb{E}[XY|X]]=\mathbb{E}[X\mathbb{E}[Y|X]]=\mathbb{E}[X\mathbb{E}[Y]]=\mathbb{E}[X]\mathbb{E}[Y].\]
+    \item[(b)] $X_n$ is $\sigma(X)$-measurable $\forall n\in\mathbb{N}$, since\[X_n=n\mathbf{1}_{\{X>n\}}+X\mathbf{1}_{\{X\leq n\}}.\] Hence \[\sigma(X_n)\subseteq\sigma(X)\forall n\]. Similarly, \[\sigma(Y_n)\subseteq\sigma(Y)\forall n\] and hence $X_n$ and $Y_n$ are independent $\forall n\in\mathbb{N}$. Hence, by (a), \[\mathbb{E}[X_nY_n]=\mathbb{E}[X_n]\mathbb{E}[Y_n]\forall n\in\mathbb{N}.\]
+    Furthermore,
+    \[0\leq X_n\uparrow X\text{ and }0\leq Y_n\uparrow Y\]so by the monotone convergence theorem
+    \[\mathbb{E}[XY]=\mathbb{E}[\lim_{n\to\infty}X_nY_n]=\lim_{n\to\infty}\mathbb{E}[X_nY_n]=\lim_{n\to\infty}\mathbb{E}[X_n]\mathbb{E}[Y_n]=\mathbb{E}[X]\mathbb{E}[Y].\]
+    \item[(c)] We have \[X=X^+-X^-,Y=Y^+-Y^-\] so \begin{align*}\mathbb{E}[XY]&=\mathbb{E}[(X^+-X^-)(Y^+-Y^-)]\\&=\mathbb{E}[X^+Y^+-X^+Y^--X^-Y^++X^-Y^-]\\&=\mathbb{E}[X^+]\mathbb{E}[Y^+]-\mathbb{E}[X^+]\mathbb{E}[Y^-]-\mathbb{E}[X^-]\mathbb{E}[Y^+]+\mathbb{E}[X^-]\mathbb{E}[Y^-]\\&=(\mathbb{E}[X^+]-\mathbb{E}[X^-])(\mathbb{E}[Y^+]-\mathbb{E}[Y^-])\\&=\mathbb{E}[X]\mathbb{E}[Y].\end{align*}
+\end{enumerate}
+\end{proof}
 \end{document}
