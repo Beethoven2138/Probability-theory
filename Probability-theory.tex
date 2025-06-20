@@ -32,6 +32,8 @@
 
 \maketitle
 
+\[\mathbb{P}(A|B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}\] so \[\mathbb{P}(A|B)=\frac{1}{\mathbb{P}(B)}\int_A\mathbf{1}_Bd\mathbb{P}.\] Hence,\[\mathbb{E}[X|B]=\int Xd\mathbb{P}(\cdot |B)=\frac{1}{\mathbb{P}(B)}\int X\mathbf{1}_Bd\mathbb{P}=\frac{\mathbb{E}[X\mathbf{1}_B]}{\mathbb{P}(B)}.\]
+
 \begin{exercise}
 Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space, and let $A_1,...,A_n$ be measurable sets. Prove by induction that\[\mathbb{P}(\bigcup_{i=1}^nA_i)\geq\sum_{i=1}^n\mathbb{P}(A_i)-\sum_{1\leq i < j\leq n}\mathbb{P}(A_i\cap A_j).\]
 \end{exercise}
@@ -341,5 +343,42 @@ Let $(\Omega, \mathcal{A}, \mathbb{P})$ be a probability space. Let $\mathcal{F}
     \item[(d)] If $\mathcal{F}=\{\emptyset,\Omega\}$ then $\mathbb{E}[X|\mathcal{F}]=\mathbb{E}[X]$ almost surely. Hence\[\text{Var}(X)=\mathbb{E}[(X-\mathbb{E}[X|\mathcal{F}])^2].\] Furthermore,\[\mathbb{E}[(X-\mathbb{E}[X|\mathcal{G}])^2]=\mathbb{E}[\mathbb{E}[(X-\mathbb{E}[X|\mathcal{G}])^2]|\mathcal{G}]=\mathbb{E}[\text{Var}(X|\mathcal{G})]\] and\begin{align*}\mathbb{E}[(\mathbb{E}[X \mid \mathcal{G}] - \mathbb{E}[X \mid \mathcal{F}])^2]&=\mathbb{E}[(\mathbb{E}[X \mid \mathcal{G}] - \mathbb{E}[X ])^2]\\&=\mathbb{E}[(\mathbb{E}[X \mid \mathcal{G}] - \mathbb{E}[\mathbb{E}[X|\mathcal{G}]])^2]\\&=\text{Var}(\mathbb{E}[X|\mathcal{G}]).\end{align*}
     Hence \[\operatorname{Var}(X) = \mathbb{E}[\operatorname{Var}(X \mid \mathcal{G})] + \operatorname{Var}(\mathbb{E}[X \mid \mathcal{G}]).\]
 \end{enumerate}
+\end{proof}
+
+\begin{exercise}
+\textbf{Martingales associated with the simple random walk.}  
+Let $p \in (0,1)$ and $(S_n)_{n \geq 1}$ be the simple random walk with parameter $p$ starting at $0$, i.e.
+\[
+S_n = \sum_{i=1}^n X_i,
+\]
+where $(X_i)_{i \geq 1}$ is a sequence of independent random variables satisfying  
+\[
+\mathbb{P}(X_i = 1) = p \quad \text{and} \quad \mathbb{P}(X_i = -1) = 1 - p \quad (\forall i \geq 1).
+\]
+Let $(\mathcal{F}_n)_{n \geq 1}$ be the natural filtration of $(X_i)_{i \geq 1}$.  
+For all $n \geq 0$, define
+\[
+M_n := S_n - n\alpha, \quad M'_n := \beta^{S_n}, \quad \text{and} \quad M''_n := S_n^2 - n.
+\]
+\begin{enumerate}
+\item[(a)] Find $\alpha$ and $\beta$ such that $(M_n)_{n \geq 1}$ and $(M'_n)_{n \geq 1}$ are martingales with respect to $(\mathcal{F}_n)_{n \geq 1}$.
+
+\item[(b)] Show that if $p = 1/2$, then $(M''_n)_{n \geq 1}$ is a martingale with respect to $(\mathcal{F}_n)_{n \geq 1}$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+Given any $\alpha$, $M_n$ is $\mathcal{F}_n$-measurable for all $n$. Furthermore, \[\mathbb{E}[|M_n|]=\mathbb{E}[|S_n-n\alpha|]\leq\mathbb{E}[|S_n|]+n|\alpha|\leq n+n|\alpha|<\infty,\] so $M_n$ is integrable for every $n$ and $\alpha$. We now need\[\mathbb{E}[M_{n+1}|\mathcal{F}_n]=M_n\text{ almost surely.}\]\begin{align*}\mathbb{E}[M_{n+1}|\mathcal{F}_n]&=\mathbb{E}[S_{n+1}-(n+1)\alpha|\mathcal{F}_n]\\&=\mathbb{E}\left[X_{n+1}+S_n-(n+1)\alpha\mid\mathcal{F}_n\right]\\&=\mathbb{E}[X_{n+1}
+|\mathcal{F}_n]+S_n-(n+1)\alpha\\&=\mathbb{E}[X_{n+1}]+S_n-(n+1)\alpha\\&=2p-1+S_n-(n+1)\alpha\\&=M_n+2p-1-\alpha\text{ almost surely}.\end{align*}Hence $M_n$ is a martingale when \[2p-1-\alpha=0\iff \alpha=2p-1.\]
+
+\noindent$f:\mathbb{R}\to\mathbb{R}:x\mapsto\beta^x$ is continuous $\forall \beta$ so $M_n'$ is $\mathcal{F}_n$-measurable $\forall n,\beta$.\[\mathbb{E}[|\beta^{S_n}|]\leq\mathbb{E}[|\beta^n|]<\infty\] so $M_n'$ is integrable.\begin{align*}
+\mathbb{E}[M_{n+1}'|\mathcal{F}_n]&=\mathbb{E}[\beta^{S_{n+1}}|\mathcal{F}_n]\\&=\mathbb{E}[\beta^{X_{n+1}}\beta^{S_n}|\mathcal{F}_n]\\&=\beta^{S_n}\mathbb{E}[\beta^{X_{n+1}}|\mathcal{F}_n]\\&=M_n'\mathbb{E}[\beta^{X_{n+1}}]\\&=M_n'(p\beta+(1-p)\beta^{-1})\\&=M_n'.
+\end{align*}
+Hence, we need\begin{align*}
+&p\beta+(1-p)\beta^{-1}=1\\\iff &p\beta^2-\beta+(1-p)=0\\\iff&\beta=\frac{1\pm\sqrt{1-4p(1-p)}}{2p}\\\iff&\beta=\frac{1\pm\sqrt{4p^2-4p+1}}{2p}\\\iff&\beta=\frac{1\pm|2p-1|}{2p}.
+\end{align*} Hence either \[\beta=\frac{1+2p-1}{2p}=1\] or \[\beta=\frac{1-2p+1}{2p}=\frac{1-p}{p}.\]
+\item[(b)] $M_n''$ is integrable, since\[\mathbb{E}[|M_n''|]\leq\mathbb{E}[|S_n^2|]+n\leq\mathbb{E}[|n^2|]+n<\infty.\] $M_n''$ is also clearly $\mathcal{F}_n$-measurable. \begin{align*}
+\mathbb{E}[M_{n+1}''|\mathcal{F}_n]&=\mathbb{E}[S_{n+1}^2-n-1|\mathcal{F}_n]\\&=\mathbb{E}[(S_n+X_{n+1})^2-n-1|\mathcal{F}_n]\\&=\mathbb{E}[S_n^2+2S_nX_{n+1}+X_{n+1}^2-n-1|\mathcal{F}_n]\\&=M_n''+\mathbb{E}[2S_nX_{n+1}+X_{n+1}^2-1|\mathcal{F}_n]\\&=M_n''+2S_n\mathbb{E}[X_{n+1}]+\mathbb{E}[X_{n+1}^2]-1\\&=M_n''+0+\frac{1}{2}\cdot 1+\frac{1}{2}\cdot(-1)^2-1\\&=M_n''.
+\end{align*}
+Hence $M_n''$ is a martingale.
 \end{proof}
 \end{document}
