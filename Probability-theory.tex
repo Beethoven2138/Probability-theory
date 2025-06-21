@@ -34,6 +34,10 @@
 
 \[\mathbb{P}(A|B)=\frac{\mathbb{P}(A\cap B)}{\mathbb{P}(B)}\] so \[\mathbb{P}(A|B)=\frac{1}{\mathbb{P}(B)}\int_A\mathbf{1}_Bd\mathbb{P}.\] Hence,\[\mathbb{E}[X|B]=\int Xd\mathbb{P}(\cdot |B)=\frac{1}{\mathbb{P}(B)}\int X\mathbf{1}_Bd\mathbb{P}=\frac{\mathbb{E}[X\mathbf{1}_B]}{\mathbb{P}(B)}.\]
 
+
+Let $X$ be a non-negative integer-valued random variable. Then \[\mathbb{E}[X]=\sum_{i=1}^\infty\mathbb{P}(X\geq i).\]
+
+
 \begin{exercise}
 Let $(\Omega,\mathcal{F},\mathbb{P})$ be a probability space, and let $A_1,...,A_n$ be measurable sets. Prove by induction that\[\mathbb{P}(\bigcup_{i=1}^nA_i)\geq\sum_{i=1}^n\mathbb{P}(A_i)-\sum_{1\leq i < j\leq n}\mathbb{P}(A_i\cap A_j).\]
 \end{exercise}
@@ -381,4 +385,51 @@ Hence, we need\begin{align*}
 \end{align*}
 Hence $M_n''$ is a martingale.
 \end{proof}
+
+\begin{exercise}
+\textbf{Martingales associated with a Galton-Watson branching process.} Assume that $(Z_n)_{n\geq0}$ is the Galton-Watson branching process of offspring distribution $(p_i)_{i\geq0}$. Assume that $\mu=\sum_{i=1}^\infty ip_i\in(0,\infty)$. Let $(\mathcal{F}_n)_{n\geq1}$ be the natural filtration of $(Z_n)_{n\geq0}$.
+\begin{enumerate}
+    \item[(a)] For all $n\geq0$, set $M_n=\frac{Z_n}{\mu^n}$. Show that $(M_n)_{n\geq0}$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq0}$.
+    \item[(b)] Assume that $\alpha>0$ is such that $\sum_{i=0}^\infty\alpha^ip_i=\alpha$. For all $n\geq1$, set $M_n'=\alpha^{Z_n}$. Show that $(M_n')_{n\geq1}$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq1}$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+\begin{enumerate}
+    \item[(a)] We have that \[\mathbb{E}[Z_{n+1}|\mathcal{F}_n]=\mu Z_n\forall n\geq 0\] so \[\mathbb{E}\left[\frac{Z_{n+1}}{\mu^{n+1}}|\mathcal{F}_n\right]=\frac{\mu Z_n}{\mu^{n+1}}=\frac{Z_n}{\mu^n}\] and hence $\frac{Z_n}{\mu^n}$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq0}$.
+    \item[(b)] First note that \[\mathbb{E}[\alpha^{\zeta_{n,i}}]=\sum_{i=0}^\infty\alpha^ip_i=\alpha.\]$M_n'$ is $\mathcal{F}_n$-measurable, since $f:\mathbb{R}\to\mathbb{R}:x\mapsto\alpha^x$ is continuous.
+    
+    We now show that $M_n'$ is integrable $\forall n$. Clearly $M_1'=\alpha^{\zeta_{0,1}}$ is integrable. Now assume $M_n'$ is integrable. We then have
+    \begin{align*}\mathbb{E}[|M_{n+1}'|]&=\mathbb{E}[\alpha^{Z_{n+1}}]\\&=\mathbb{E}[\alpha^{\sum_{i=1}^{Z_n}\zeta_{n,i}}]\\&=\mathbb{E}[\sum_{k=0}^\infty\mathbf{1}_{\{Z_n=k\}}\alpha^{\sum_{i=1}^k\zeta_{n,i}}]\\&=\sum_{k=0}^\infty\mathbb{E}[\mathbf{1}_{\{Z_n=k\}}\alpha^{\sum_{i=1}^k\zeta_{n,i}}].\end{align*} For each $k$, we have\[\alpha^{\sum_{i=1}^k\zeta_{n,i}}=\prod_{i=1}^k\alpha^{\zeta_{n,i}}\in L^1,\] since $\alpha^{\zeta_{n,i}}\in L^1\forall n,i$. Hence, by independence,\begin{align*}
+    \sum_{k=0}^\infty\mathbb{E}[\mathbf{1}_{\{Z_n=k\}}\alpha^{\sum_{i=1}^k\zeta_{n,i}}]&=\sum_{k=0}^\infty\mathbb{E}[\mathbf{1}_{\{Z_n=k\}}]\mathbb{E}[\alpha^{\sum_{i=1}^k\zeta_{n,i}}]\\&=\sum_{k=0}^\infty\mathbb{P}(Z_n=k)\alpha^k\\&=\mathbb{E}[\alpha^{Z_n}]<\infty.
+    \end{align*} Hence $M_n'$ is integrable $\forall n$ by induction.
+    Finally,
+    \begin{align*}\mathbb{E}[M_{n+1}'|\mathcal{F}_n]&=\mathbb{E}[\alpha^{Z_{n+1}}|\mathcal{F}_n]\\&=\mathbb{E}[\alpha^{\sum_{i\geq1}\zeta_{n,i}\mathbf{1}_{\{i\leq Z_n\}}}|\mathcal{F}_n]\\&=\mathbb{E}\left[\sum_{k=1}^\infty\mathbf{1}_{\{Z_n=k\}}\alpha^{\sum_{i=1}^k\zeta_{n,i}}|\mathcal{F}_n\right]\\&=\sum_{k=0}^\infty\mathbb{E}[\mathbf{1}_{\{Z_n=k\}}\alpha^{\sum_{i=1}^k\zeta_{n,i}}|\mathcal{F}_n]\\&=\sum_{k=0}^\infty\mathbf{1}_{\{Z_n=k\}}\mathbb{E}[\alpha^{\sum_{i=1}^k\zeta_{n,i}}|\mathcal{F}_n]\\&=\sum_{k=0}^\infty\mathbf{1}_{\{Z_n=k\}}\mathbb{E}[\prod_{i=1}^k\alpha^{\zeta_{n,i}}]\\&=\sum_{k=0}^\infty\mathbf{1}_{\{Z_n=k\}}\alpha^k\\&=\alpha^{Z_n}\\&=M_n'\text{ almost surely.}\end{align*}Hence $M_n'$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq1}$.
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}[Generalised Pólya urn]
+An urn initially contains $X_0 = x > 0$ grams of red powder and $Y_0 = y > 0$ grams of green powder.  Sample $(V_i)_{i\ge1}$, a sequence of non-negative i.i.d.\ random variables.  At each time step $n+1$ ($n\ge0$), we pick a speck of powder uniformly at random from the urn and then return it to the urn together with $V_{n+1}$ grams of powder of the same colour as that speck.
+
+More formally, let $(U_i)_{i\ge1}$ be a sequence of i.i.d.\ $\mathrm{Unif}[0,1]$ random variables, independent of $(V_i)_{i\ge1}$.  Define $(X_n)_{n\ge0}$ and $(Y_n)_{n\ge0}$ by
+\[
+  (X_{n+1},Y_{n+1})
+  = 
+  \begin{cases}
+    (\,X_n + V_{n+1},\,Y_n\,), 
+      &\text{if } U_{n+1} < \dfrac{X_n}{X_n + Y_n}, \\[1em]
+    (\,X_n,\,Y_n + V_{n+1}), 
+      &\text{if } U_{n+1} \ge \dfrac{X_n}{X_n + Y_n}.
+  \end{cases}
+\]
+For all $n\ge0$, set
+\[
+  M_n \;=\; \frac{X_n}{X_n + Y_n}.
+\]
+Show that $(M_n)_{n\ge0}$ is a martingale with respect to the filtration
+\[
+  \mathcal{F}_n \;=\;\sigma\bigl(U_1,V_1,\dots,U_n,V_n\bigr).
+\]
+\emph{(Hint: first consider the case where the $V_i$ are non-random.)}
+\end{exercise}
+
 \end{document}
