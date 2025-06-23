@@ -438,7 +438,62 @@ We show that $X_n$ and $Y_n$ are $\mathcal{F}_n$-measurable by induction. For $n
 We now show that $M_n$ is integrable $\forall n$. Clearly $M_0$ is integrable. Otherwise,\[M_{n+1}=\frac{X_n+V_{n+1}\mathbf{1}_{\{U_{n+1}<\frac{X_n}{X_n+Y_n}\}}}{X_n+Y_n+V_{n+1}}<1.\] Hence $M_n$ is integrable $\forall n$.
 
 \begin{align*}\mathbb{E}[M_{n+1}|\mathcal{F}_n]&=\mathbb{E}\left[\frac{X_n+V_{n+1}\mathbf{1}_{\{U_{n+1}<\frac{X_n}{X_n+Y_n}\}}}{X_n+Y_n+V_{n+1}}|\mathcal{F}_n\right]\\&=\mathbb{E}\left[\sum_{i=0}^\infty\mathbf{1}_{\{V_{n+1}=i\}}\frac{X_n+i\mathbf{1}_{\{U_{n+1}<\frac{X_n}{X_n+Y_n}\}}}{X_n+Y_n+i}|\mathcal{F}_n\right]\\&=\sum_{i=0}^\infty\mathbb{E}\left[\mathbf{1}_{\{V_{n+1}=i\}}\frac{X_n+i\mathbf{1}_{\{U_{n+1}<\frac{X_n}{X_n+Y_n}\}}}{X_n+Y_n+i}|\mathcal{F}_n\right]\\&=\sum_{i=0}^\infty\frac{\mathbb{E}[\mathbf{1}_{\{V_{n+1}=i\}}(X_n+i\mathbf{1}_{\{U_{n+1}<\frac{X_n}{X_n+Y_n}\}})|\mathcal{F}_n]}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\frac{X_n\mathbb{E}[\mathbf{1}_{\{V_{n+1}=i\}}|\mathcal{F}_n]+\mathbb{E}[i\mathbf{1}_{\{V_{n+1}=i\}}\mathbf{1}_{\{U_{n+1}<\frac{X_n}{X_n+Y_n}\}}|\mathcal{F}_n]}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\frac{X_n\mathbb{P}(V_{n+1}=i)+i\mathbb{E}[\mathbf{1}_{\{V_{n+1}=i\}}\mathbf{1}_{\{U_{n+1}<\frac{X_n}{X_n+Y_n}\}}|\mathcal{F}_n]}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\frac{X_n\mathbb{P}(V_{n+1}=i)+i\mathbb{P}(V_{n+1}=i,U_{n+1}<\frac{X_n}{X_n+Y_n}|\mathcal{F}_n)}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\frac{X_n\mathbb{P}(V_{n+1}=i)+i\mathbb{P}(V_{n+1}=i)M_n}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\mathbb{P}(V_{n+1}=i)\frac{X_n+iM_n}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\mathbb{P}(V_{n+1}=i)\frac{X_n+\frac{iX_n}{X_n+Y_n}}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\mathbb{P}(V_{n+1}=i)\frac{\frac{X_n(X_n+Y_n+i)}{X_n+Y_n}}{X_n+Y_n+i}\\&=\sum_{i=0}^\infty\mathbb{P}(V_{n+1}=i)M_n\\&=M_n\text{ almost surely.}\end{align*}
-Hence $M_n$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq0}$
+Hence $M_n$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq0}$.
 \end{proof}
+
+\begin{exercise}
+\begin{enumerate}
+    \item[(a)] Assume that $(X_i)_{i \geq 1}$ is a sequence of random variables and 
+    $\mathcal{F}_n = \sigma(X_1, X_2, \ldots, X_n)$ for all $n \geq 1$. 
+    Which of the following random variables are stopping times 
+    (use the convention $\min \emptyset = +\infty$)? Justify your answers.
+    
+    \begin{enumerate}
+        \item[i.] $T_1 = \min\{n \geq 1 : X_n \in [15, 20]\}$
+        \item[ii.] $T_2 = \min\{n \geq 1 : X_1 + 2X_2 + \cdots + nX_n \geq 120\}$
+        \item[iii.] $T_3 = 5$
+        \item[iv.] $T_4 = \min\{n \geq 2 : X_n = 8 \text{ and } X_{n-1} = 6\}$
+        \item[v.] $T_5 = \min\{n \geq 1 : X_n = 8 \text{ and } X_{n+1} = 6\}$
+    \end{enumerate}
+    
+    \item[(b)] Suppose $S$ and $T$ are stopping times. Show that $\min(S, T)$ and $S + T$ are stopping times.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] 
+\begin{itemize}
+\item[(i)] \[\{T_1\leq n\}=\bigcup_{i=1}^n\{X_i\in[15,20]\}\in\mathcal {F}_n\] so $T_1$ is a stopping time.
+\item[(ii)] \[\{T_2\leq n\}=\bigcup_{i=1}^n\left\{\sum_{j=1}^ijX_j\geq120\right\}\in\mathcal{F}_n\] so $T_2$ is a stopping time.
+\item[(iii)] \[\{T_3=n\}\in\{\emptyset,\Omega\}\] so $T_3$ is trivially a stopping time.
+\item[(iv)] \[\{T_4=1\}=\emptyset\in\mathcal{F}_1.\]And for $n\geq 2,$\[\{T_4\leq n\}=\bigcup_{i=2}^n\{X_i=8,X_{i-1}=6\}\in\mathcal{F}_n.\] Hence $X_4$ is a stopping time.
+\item[(v)] \[\{T_5=1\}=\{X_1=8,X_2=6\}\not\in\mathcal{F}_1\] so $T_5$ is not a stopping time.
+\end{itemize}
+\item[(b)] \[\{\min(S,T)\leq n\}=\{S\leq n\}\cup\{T\leq n\}\in\mathcal{F}_n\] so $\min(S,T)$ is a stopping time.\[\{S+T=n\}=\bigcup_{i=1}^{n-1}\{S=i,T=n-i\}\in\mathcal{F}_n.\] Hence $S+T$ is a stopping time.
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+An investor buys shares in a company. At the end of each six-month period, the shareholder will receive dividends of size $0$, $1$, or $2$ per share, with probability $1/6$, $1/2$, and $1/3$, respectively. Let $(X_i)_{i \geq 1}$ be the successive dividends (per share) received by the investor (assumed i.i.d.).
+
+\medskip
+
+The investor sells his shares at the first time when the dividend is of size $0$ (say, on the $T$-th dividend: $X_T = 0$). Let $S = \sum_{i=1}^{T} X_i$ be the total dividend income per share received by the investor before they sell. Calculate $\mathbb{E}[S]$.
+\end{exercise}
+
+\begin{exercise}
+Let $(S_n)_{n \geq 0}$ be the simple random walk with parameter $p \neq 1/2$. Let $a > 0$ and $b > 0$ be integers. Let 
+\[
+T = \min\{n \geq 1 : S_n = a \text{ or } S_n = -b\}.
+\]
+Find a formula for $\mathbb{E}[T]$.
+
+\medskip
+
+\textit{You can use without a proof that $\mathbb{E}[T] < +\infty$. $\mathbb{P}(S_T = a) = \dfrac{\alpha^b - 1}{\alpha^{a+b} - 1}$, where $\alpha = \dfrac{1 - p}{p}$.}
+
+\textit{(See Equation (8.5) in the lecture notes for the second claim. The first claim can be proved by adapting the proof of $\mathbb{E}[T] < +\infty$ in the symmetric case in Section 7.2.)}
+
+\end{exercise}
 
 \end{document}
