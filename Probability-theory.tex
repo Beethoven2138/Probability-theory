@@ -480,6 +480,9 @@ An investor buys shares in a company. At the end of each six-month period, the s
 
 The investor sells his shares at the first time when the dividend is of size $0$ (say, on the $T$-th dividend: $X_T = 0$). Let $S = \sum_{i=1}^{T} X_i$ be the total dividend income per share received by the investor before they sell. Calculate $\mathbb{E}[S]$.
 \end{exercise}
+\begin{proof}
+\[T=\inf\{n\geq1:X_n=0\},\] which is clearly a stopping time. Furthermore, \[\mathbb{E}[T]=\sum_{n=1}^\infty\mathbb{P}(T\geq n)=\sum_{n=1}^\infty\left(\frac{5}{6}\right)^{n-1}=6<\infty\] and\[\mathbb{E}[X_1]=\frac{1}{2}+\frac{2}{3}=\frac{7}{6}<\infty.\] Hence Wald's equation applies to give\[\mathbb{E}[S]=\frac{7}{6}\cdot 6=7.\]
+\end{proof}
 
 \begin{exercise}
 Let $(S_n)_{n \geq 0}$ be the simple random walk with parameter $p \neq 1/2$. Let $a > 0$ and $b > 0$ be integers. Let 
@@ -493,7 +496,34 @@ Find a formula for $\mathbb{E}[T]$.
 \textit{You can use without a proof that $\mathbb{E}[T] < +\infty$. $\mathbb{P}(S_T = a) = \dfrac{\alpha^b - 1}{\alpha^{a+b} - 1}$, where $\alpha = \dfrac{1 - p}{p}$.}
 
 \textit{(See Equation (8.5) in the lecture notes for the second claim. The first claim can be proved by adapting the proof of $\mathbb{E}[T] < +\infty$ in the symmetric case in Section 7.2.)}
-
 \end{exercise}
+\begin{proof}
+By Wald's equation,\[\mathbb{E}[S_T]=\mathbb{E}[X_1]\mathbb{E}[T]=(2p-1)\mathbb{E}[T].\] Furthermore,\[\mathbb{E}[S_T]=a\mathbb{P}(S_T=a)-b\mathbb{P}(S_T=-b)=a\frac{\alpha^b-1}{\alpha^{a+b}-1}-b\left(1-\frac{\alpha^b-1}{\alpha^{a+b}-1}\right).\]Hence,\[\mathbb{E}[T]=\frac{1}{2p-1}\left(a\frac{\alpha^b-1}{\alpha^{a+b}-1}-b\left(1-\frac{\alpha^b-1}{\alpha^{a+b}-1}\right)\right).\]
+\end{proof}
 
+\begin{exercise}
+The transmitter spaceship "Supermartingale" was struck by a meteorite and has started sending out random letters into space. Assume that the letters $X_1,X_2,...$ sent after the strike are i.i.d., with each $X_n$ uniformly distributed over the $26$ letters of the alphabet. Let $T$ denote the first time the transmitter sends the crucial sequence "SOS", i.e.\[T=\inf\{n\geq3:X_n=\text{S},X_{n-1}=\text{O},X_{n-2}=\text{S}\},\]so that $\{T\leq2\}=\emptyset$. Let $V_0=0$ and, for all $i\geq1$, let $V_i=\min\{n>V_{i-1}:X_n=\text{S}\}$. Also set $W_i=V_i-V_{i-1}$ for all $i\geq1$. Finally, for all $i\geq1$, let $Y_i$ denote the block of letters $(X_{V_{i-1}+1},...,X_{V_i})$, and set $T'=\min\{V_i:Y_i=\text{OS}\}$ be the number of letters up to the end of the first block to take the value OS.
+\begin{enumerate}
+\item[(a)] Find $\mathbb{E}[W_1]$ and find $\mathbb{P}(Y_1=\text{OS})$.
+\item[(b)] Let $N$ be the total number of times the letter S is emitted up to and including time $T'$. Find $\mathbb{E}[N]$, justifying your answer briefly.
+\item[(c)] Calculate $\mathbb{E}[T']$.
+\item[(d)] Calculate $\mathbb{E}[T]$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] \[\mathbb{E}[W_1]=\sum_{n=1}^\infty\mathbb{P}(W_1\geq n)=\sum_{n=1}^\infty\left(\frac{25}{26}\right)^{n-1}=26.\]\[\mathbb{P}(Y_1=\text{OS})=\left(\frac{1}{26}\right)^2.\]
+\item[(b)]
+\begin{align*}\mathbb{P}(N> n)&=\mathbb{P}(N> n|N> n-1)\mathbb{P}(N> n-1)\\&=(1-\mathbb{P}(Y_n=\text{OS}))\mathbb{P}(N> n-1)\\&=(1-\mathbb{P}(Y_1=\text{OS}))\mathbb{P}(N>n-1)\\&=\frac{675}{676}\mathbb{P}(N>n-1).\end{align*}
+Hence by induction\[\mathbb{P}(N>n)=\left(\frac{675}{676}\right)^n\]so\[\mathbb{E}[N]=\sum_{n=1}^\infty\mathbb{P}(N>n-1)=\sum_{n=1}^\infty\left(\frac{675}{676}\right)^{n-1}=676.\]
+\item[(c)] \[T'=V_N=\sum_{i=1}^NW_i.\] $W_1,W_2,...$ are clearly i.i.d., so Wald's equation applies to give \[\mathbb{E}[T']=\mathbb{E}[W_1]\mathbb{E}[N]=26\cdot 676=26^3.\]
+\item[(d)]
+\begin{align*}
+\mathbb{E}[T|N]&=\mathbb{E}[T\mathbf{1}_{\{N>1\}}+T\mathbf{1}_{\{N=1\}}|N]\\&=\mathbb{E}[T'\mathbf{1}_{\{N>1\}}+T\mathbf{1}_{\{N=1\}}|N]\\&=\mathbf{1}_{\{N>1\}}\mathbb{E}[T'|N]+\mathbf{1}_{\{N=1\}}\mathbb{E}[T|N=1]\\&=\mathbf{1}_{\{N>1\}}\mathbb{E}[T'|N]+\mathbf{1}_{\{N=1\}}(\mathbb{E}[T']+2)
+\end{align*}
+so\begin{align*}
+\mathbb{E}[T]&=\mathbb{E}[\mathbf{1}_{\{N>1\}}\mathbb{E}[T'|N]]+(\mathbb{E}[T']+2)\mathbb{P}(N=1)\\&=\mathbb{E}[T'\mathbf{1}_{\{N>1\}}]+(\mathbb{E}[T']+2)\mathbb{P}(Y_1=\text{OS})\\&=\mathbb{E}[T']-\mathbb{E}[T'\mathbf{1}_{\{N=1\}}]+(\mathbb{E}[T']+2)\mathbb{P}(Y_1=\text{OS})\\&=\mathbb{E}[T']+(\mathbb{E}[T']+2)\mathbb{P}(Y_1=\text{OS})-\mathbb{E}[T'|N=1]\mathbb{P}(Y_1=\text{OS})\\&=\mathbb{E}[T']+(\mathbb{E}[T']+2)\mathbb{P}(Y_1=\text{OS})-2\mathbb{P}(Y_1=\text{OS})\\&=26^3+\frac{(26^3+2)}{26^2}-\frac{2}{26^2}=17602.
+\end{align*}
+\end{enumerate}
+\end{proof}
 \end{document}
