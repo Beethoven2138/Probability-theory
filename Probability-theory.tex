@@ -526,4 +526,58 @@ so\begin{align*}
 \end{align*}
 \end{enumerate}
 \end{proof}
+
+\begin{exercise}
+Suppose you bet on successive tosses of a fair coin. You bet an amount $2^{n-1}$ on the $n$-th toss of the coin, so that, at the $n$-th toss you win or lose $2^{n-1}$ with equal probability. For all $n \geq 0$, let $M_n$ be your total winnings after $n$ tosses ($M_0 = 0$).
+
+\begin{enumerate}
+    \item[(i)] Show that $(M_n)_{n \geq 0}$ is a martingale with respect to an appropriate filtration.
+    
+    \item[(ii)] Let $T$ be the first time you win the bet; assume that you stop betting at time $T$. Show that $M_T = 1$ with probability $1$, and deduce that the conclusion of the Optional Stopping Theorem fails. Which of the conditions of the OST fail?
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(i)] Let $(X_i)_{i\geq0}$ be a sequence of i.i.d. random variables such that \[\mathbb{P}(X_1=1)=\mathbb{P}(X_1=-1)=\frac{1}{2}.\]Then \[M_n=\sum_{i=1}^n2^{i-1}X_i\forall n.\] let $(\mathcal{F}_n)_{n\geq0}$ be the natural filtration of $(X_i)_{i\geq0}$.
+$M_n$ is clearly $\mathcal{F}_n$-measurable $\forall n$. Furthermore,\[\mathbb{E}[|M_n|]=\mathbb{E}\left[\left|\sum_{i=1}^n2^{i-1}X_i\right|\right]\leq\left[\sum_{i=1}^n2^{i-1}\right]<\infty.\]
+Finally,\begin{align*}\mathbb{E}[M_{n+1}|\mathcal{F}_n]&=\mathbb{E}[2^nX_{n+1}+M_n|\mathcal{F}_n]\\&=2^n\mathbb{E}[X_{n+1}|\mathcal{F}_n]+M_n\\&=2^n\mathbb{E}[X_{n+1}]+M_n\\&=M_n\text{ almost surely.}\end{align*} Hence $(M_n)_{n\geq0}$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq0}$.
+\item[(ii)] \[M_T=2^{T-1}-\sum_{i=1}^{T-1}2^{i-1}=1.\] This is different to $\mathbb{E}[M_0]=0$. $T$ is clearly a stopping time with respect to $(\mathcal{F}_n)_{n\geq0}$. Furthermore, \[\mathbb{P}(T=\infty)=\lim_{n\to\infty}\left(\frac{1}{2}\right)^n=0\] so $T<\infty$ almost surely.\[\mathbb{E}[|M_T|]=1<\infty\] so in order for the Optional stopping theorem to fail we need\[\lim_{n\to\infty}\mathbb{E}[M_n\mathbf{1}_{\{T>n\}}]\neq0.\]
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+At time 0, a bag contains one red marble and one green marble. At each time step $1, 2, \dots$, we draw a ball uniformly at random from the bag, and then replace it in the bag together with an additional marble of the same colour. Let $R_n$ denote the number of red balls in the bag after $n$ steps ($R_0 = 1$). Recall that $M_n = \frac{R_n}{n+2}$ is a martingale with respect to $(\mathcal{F}_n)_{n \geq 0}$ with $\mathcal{F}_n = \sigma(R_1, \dots, R_n)$, for all $n \geq 1$, and $\mathcal{F}_0 = \{\emptyset, \Omega\}$. Let $T$ be the number of marbles drawn until the first draw of a red marble.
+
+\begin{enumerate}
+    \item[(i)] Show that $T$ is an $(\mathcal{F}_n)_{n \geq 0}$-stopping time.
+    
+    \item[(ii)] Show that $T < \infty$ almost surely.
+    
+    \item[(iii)] Show that
+    \[
+    \mathbb{E} \left[ \frac{1}{T + 2} \right] = \frac{1}{4}.
+    \]
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+For all $n \geq 0$, let $Y_n$ be the assets (in GBP) of an insurance company after $n$ years of trading. We assume that $Y_0 \in (0, \infty)$ is deterministic. Each year, the company receives a total income of $P$ (a fixed amount) in premiums, and pays out a total of $C_n$, so
+\[
+Y_{n+1} = Y_n + P - C_{n+1} \quad \text{for all } n \geq 0.
+\]
+Assume that $(C_i)_{i \geq 1}$ is a sequence of i.i.d. $\mathcal{N}(\mu, \sigma^2)$ random variables with $\mu < P$, and therefore have moment generating function
+\[
+\mathbb{E}[e^{\theta C_1}] = \exp(\mu \theta + \sigma^2 \theta^2 / 2). \tag{1}
+\]
+
+\begin{enumerate}
+    \item[(i)] Show that $M_n := e^{-\theta Y_n}$ is a martingale for a certain choice of $\theta > 0$.
+    
+    \item[(ii)] We say that the company becomes bankrupt if there exists $n \geq 1$ such that $Y_n < 0$. Using the Elementary Stopping Lemma, show that
+    \[
+    \mathbb{P}(Y_n < 0 \text{ for some } n) \leq \exp(-2(P - \mu)Y_0 / \sigma^2).
+    \]
+\end{enumerate}
+\end{exercise}
+
 \end{document}
