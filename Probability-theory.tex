@@ -559,6 +559,13 @@ At time 0, a bag contains one red marble and one green marble. At each time step
     \]
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(i)] \[\{T>n\}=\bigcap_{i=0}^n\{R_i=1\}\in\mathcal{F}_n\forall n\] so $T$ is an $(\mathcal{F}_n)_{n \geq 0}$-stopping time.
+\item[(ii)] \[\mathbb{P}(T=\infty)=\lim_{n\to\infty}\prod_{i=1}^n\frac{i}{(i+1)}=\lim_{n\to\infty}\frac{1}{n+1}=0\] so $T<\infty$ almost surely.
+\item[(iii)] $M_n$ is bounded so the Optional stopping theorem applies, to give \[\mathbb{E}[M_T]=\mathbb{E}[M_0].\]Furthermore,\[M_T=\frac{2}{T+2}\] and\[\mathbb{E}[M_0]=\frac{1}{2}\] so\[\mathbb{E}\left[\frac{1}{T+2}\right]=\frac{1}{4}.\]
+\end{enumerate}
+\end{proof}
 
 \begin{exercise}
 For all $n \geq 0$, let $Y_n$ be the assets (in GBP) of an insurance company after $n$ years of trading. We assume that $Y_0 \in (0, \infty)$ is deterministic. Each year, the company receives a total income of $P$ (a fixed amount) in premiums, and pays out a total of $C_n$, so
@@ -579,5 +586,13 @@ Assume that $(C_i)_{i \geq 1}$ is a sequence of i.i.d. $\mathcal{N}(\mu, \sigma^
     \]
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(i)] Let $(\mathcal{F}_n)_{n\geq0}$ be the natural filtration of $(Y_n)_{n\geq0}$. Then $M_n$ is clearly $\mathcal{F}_n$-measurable $\forall n$.\[Y_n=Y_0+nP-\sum_{i=1}^nC_i\]so\[M_n=e^{-\theta(Y_0+nP-\sum_{i=1}^nC_i)}=e^{-\theta Y_0}\prod_{i=1}^ne^{\theta(C_i-P)}.\] If \[\mathbb{E}[e^{\theta(C_i-P)}]=1\forall i\] then $M_n$ is a martingale. Hence we need\begin{align*}
+\exp(\mu\theta+\sigma^2\theta^2/2)&=\exp(\theta P)\\\iff\mu\theta+\sigma^2\theta^2/2&=\theta P\\\iff\mu+\sigma^2\theta/2&=P\\\iff\theta&=\frac{2}{\sigma^2}(P-\mu).
+\end{align*}
+\end{enumerate}
+\item[(ii)] Let $T:=\inf\{n\geq1:Y_n<0\}$. $T$ is an $(\mathcal{F}_n)_{n\geq0}$-stopping time, so by the Elementary stopping lemma\[\mathbb{E}[M_{n\wedge T}]=\mathbb{E}[M_0]=\exp(-\theta Y_0)\forall n\geq0.\]Furthermore,\[Y_n<0\iff M_n>1\]so\[\mathbb{E}[M_{n\wedge T}]\geq\mathbb{E}[M_{n\wedge T}\mathbf{1}_{\{T\leq n\}}]=\mathbb{E}[M_T\mathbf{1}_{\{T\leq n\}}]\geq\mathbb{P}(T\leq n)\forall n.\]Hence\[\mathbb{P}(T<\infty)\leq\exp\left(-\frac{2}{\sigma^2}(P-\mu)Y_0\right).\]
+\end{proof}
 
 \end{document}
