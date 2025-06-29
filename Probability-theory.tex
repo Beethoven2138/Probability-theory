@@ -594,4 +594,66 @@ Assume that $(C_i)_{i \geq 1}$ is a sequence of i.i.d. $\mathcal{N}(\mu, \sigma^
 \item[(ii)] Let $T:=\inf\{n\geq1:Y_n<0\}$. $T$ is an $(\mathcal{F}_n)_{n\geq0}$-stopping time, so by the Elementary stopping lemma\[\mathbb{E}[M_{n\wedge T}]=\mathbb{E}[M_0]=\exp(-\theta Y_0)\forall n\geq0.\]Furthermore,\[Y_n<0\iff M_n>1\]so\[\mathbb{E}[M_{n\wedge T}]\geq\mathbb{E}[M_{n\wedge T}\mathbf{1}_{\{T\leq n\}}]=\mathbb{E}[M_T\mathbf{1}_{\{T\leq n\}}]\geq\mathbb{P}(T\leq n)\forall n.\]Hence\[\mathbb{P}(T<\infty)\leq\exp\left(-\frac{2}{\sigma^2}(P-\mu)Y_0\right).\]
 \end{proof}
 
+\begin{exercise}
+Let $p \in (0,1) \setminus \{\tfrac{1}{2}\}$ and $a, b$ be two integers such that $1 \leq a < b$. Let $(X_i)_{i \geq 1}$ be a sequence of i.i.d.\ random variables such that $\mathbb{P}(X_i = 1) = p$ and $\mathbb{P}(X_i = -1) = q = 1 - p$. Let $S_0 = a$, and $S_n = a + \sum_{i=1}^n X_i$. Finally, for all $n \geq 0$, set
+\[
+M_n = \left( \frac{q}{p} \right)^{S_n}.
+\]
+
+Recall that $(M_n)_{n \geq 0}$ is a martingale with respect to $(\mathcal{F}_n)_{n \geq 0}$, the natural filtration of $(S_n)_{n \geq 0}$. Recall that 
+\[
+T := \inf\{n \geq 0 : S_n = 0 \text{ or } S_n = b\}
+\]
+is the stopping time when $S$ first hits $0$ or $b$.
+
+\begin{enumerate}
+    \item[(a)] Show that $M_{T \wedge n}$ converges almost surely as $n \to +\infty$.
+    \item[(b)] Reasoning by contradiction, deduce that $\mathbb{P}(T < \infty) = 1$.
+    \item[(c)] Calculate $\mathbb{P}(S_T = 0)$.
+    \item[(d)] Show that $\mathbb{E}[S_{T \wedge n}] \to \mathbb{E}[S_T]$ as $n \uparrow \infty$.
+    \item[(e)] Show that, as $n \uparrow \infty$, $\mathbb{E}[T \wedge n] \to \mathbb{E}[T]$.
+    \item[(f)] Find an expression for $\mathbb{E}[T]$.
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] $M_{n\wedge T}$ is a martingale, and by the elementary stopping lemma\[\mathbb{E}[M_{n\wedge T}]=\mathbb{E}[M_0]=\left(\frac{q}{p}\right)^a\forall n.\] Hence \[\sup_{n\geq0}\mathbb{E}[|M_{n\wedge T}|]<\infty\] so by the martingale convergence theorem $M_{n\wedge T}$ converges almost surely.
+\item[(b)] Suppose that $T=\infty$ and $M_{n\wedge T}$ converges for some $\omega\in\Omega$. If $T=\infty$ then $M_{n\wedge T}=M_n\forall n$ so \[\lim_{n\to\infty}M_{n\wedge T}=\lim_{n\to\infty}\left(\frac{q}{p}\right)^{S_n}.\] However, we also have\[0<S_n<b\forall n\] so $M_n$ takes finitely many values. There must be at least two values which $M_n$ can take, since otherwise $T$ would occur. Let $\epsilon$ be a quarter of the smallest difference between any two values which $M_n$ takes. There then does not exist an $N\in\mathbb{N}$ such that $|M_n-M_\infty|<\epsilon\forall n>N$, which is a contradiction; hence the limit does not exist. Hence \[\{T=\infty\}\cap\{M_{n\wedge T}\text{ converges}\}=\emptyset.\] That is, for every $\omega\in\Omega$ such that $M_{n\wedge T}$ converges, $T<\infty$. Hence\[\mathbb{P}(T=\infty)\leq\mathbb{P}(M_{n\wedge T}\text{ does not converge})=0\] so\[\mathbb{P}(T<\infty)=1.\]
+\item[(c)] The probability that $S_T=0$ is the same as the probability that we hit $-a$ before $b-a$ for a random walk starting at $0$. Hence\begin{align*}
+\mathbb{P}(S_T=0)&=1-\frac{\alpha^{a}-1}{\alpha^{b-a+a}-1}\\&=1-\frac{\alpha^a-1}{\alpha^b-1}\\&=\frac{\alpha^b-\alpha^a}{\alpha^b-1}
+\end{align*}where \[\alpha:=\frac{q}{p}.\]
+\item[(d)] $|S_{n\wedge T}|\leq b\forall n$ almost surely. Furthermore, $T<\infty$ almost surely, so there exists an $N\in\mathbb{N}$ such that $S_{n\wedge T}=S_T\forall n> N$ almost surely, and hence $S_{n\wedge T}\to S_T$ as $n\uparrow\infty$ almost surely. Hence by the dominated convergence theorem \[\mathbb{E}[S_{n\wedge T}]\to\mathbb{E}[S_T]\text{ as }n\uparrow\infty.\]
+\item[(e)] $T$ is finite almost surely so $n\wedge T\uparrow T$ almost surely. Hence by the monotone convergence theorem\[\mathbb{E}[n\wedge T]\to\mathbb{E}[T]\text{ as }n\to\infty.\]
+\item[(f)] \[\mathbb{E}[S_T]=b\mathbb{P}(S_T=b)=b\frac{\alpha^a-1}{\alpha^b-1}.\]$n\wedge T$ is a stopping time so by Wald's equation\[\mathbb{E}[S_{n\wedge T}]-a=(p-q)\mathbb{E}[n\wedge T]\] so\[\lim_{n\to\infty}\mathbb{E}[S_{n\wedge T}]=a+(p-q)\mathbb{E}[T].\] Furthermore,\[\lim_{n\to\infty}\mathbb{E}[S_{n\wedge T}]=\mathbb{E}[S_T]=b\frac{\alpha^a-1}{\alpha^b-1}\] and hence\[\mathbb{E}[T]=\frac{1}{p-q}\left(b\frac{\alpha^a-1}{\alpha^b-1}-a\right).\]
+\end{enumerate}
+\end{proof}
+
+
+\begin{exercise}
+\textit{Martingale formulation of Bellman's Optimality Principle.}
+A player plays a game for $N$ units of time. At each time $n \geq 1$, the winnings per unit stake are $\varepsilon_n$, where $(\varepsilon_n)_{n \geq 1}$ is a sequence of i.i.d.\ random variables such that, for all $n \geq 1$,
+\[
+\mathbb{P}(\varepsilon_n = +1) = p, \quad \mathbb{P}(\varepsilon_n = -1) = q, \quad \text{where} \quad \frac{1}{2} < p = 1 - q < 1.
+\]
+
+For all $n \geq 0$, we let $Z_n$ denote the fortune of the player at time $n$. The player’s stake at time $n$, $C_n$, must lie in $(0, Z_{n-1})$. The player’s aim is to maximise the expected ``interest rate'' $\mathbb{E}[\log(Z_N / Z_0)]$. For all $n \geq 0$, we set 
+\[
+\mathcal{F}_n = \sigma(C_1, \varepsilon_1, \ldots, C_n, \varepsilon_n, C_{n+1}).
+\]
+Let
+\[
+\alpha := p \log p + q \log q + \log 2.
+\]
+
+You can use without proof that $\log Z_n$ is integrable for all $n \geq 0$.
+
+\begin{enumerate}
+    \item[(a)] Show that $(\log Z_n - n \alpha)_{n \geq 0}$ is a super-martingale with respect to $(\mathcal{F}_n)_{n \geq 0}$. \textit{(Hint: you may want to show that the function $x \mapsto p \log(1 + x) + q \log(1 - x)$ on $[0, 1)$ reaches its maximum at $x = p - q$.)}
+    
+    \item[(b)] Deduce that $\mathbb{E}[\log(Z_N / Z_0)] \leq N \alpha$.
+    
+    \item[(c)] Find a process $(C_n)_{n \geq 1}$ such that $(\log Z_n - n \alpha)_{n \geq 0}$ is an $(\mathcal{F}_n)_{n \geq 0}$-martingale. What is the best strategy for the player?
+\end{enumerate}
+\end{exercise}
+
 \end{document}
