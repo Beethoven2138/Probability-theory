@@ -696,6 +696,9 @@ where $(X_i)_{i \geq 1}$ is a sequence of i.i.d.\ random variables, such that
 \]
 Show that $(S_n)_{n \geq 1}$ is bounded in $L^2$ and deduce that $S_n$ converges to a limit almost surely as $n \to \infty$.
 \end{exercise}
+\begin{proof}
+Let $(\mathcal{F}_n)_{n\geq1}$ be the natural filtration of $(S_n)_{n\geq1}$. \[S_{n+1}=S_n+\frac{X_{n+1}}{n+1}\] so \begin{align*}\mathbb{E}[S_{n+1}^2]&=\mathbb{E}\left[\mathbf{1}_{\{X_{n+1}=1\}}\left(S_n+\frac{1}{n+1}\right)^2+\mathbf{1}_{\{X_{n+1}=-1\}}\left(S_n-\frac{1}{n+1}\right)^2\right]\\&=\frac{1}{2}\mathbb{E}\left[\left(S_n+\frac{1}{n+1}\right)^2\right]+\frac{1}{2}\mathbb{E}\left[\left(S_n-\frac{1}{n+1}\right)^2\right]\\&=\mathbb{E}[S_n^2]+\frac{1}{(n+1)^2}\end{align*} and hence\[\mathbb{E}[S_n^2]=\sum_{i=1}^n\frac{1}{i^2}<\frac{\pi^2}{6}\forall n\] so $(S_n)_{n\geq 1}$ is bounded in $L^2$. Furthermore, $S_n$ is a sum of independent integrable random variables, each with expectation of $0$, and hence is a martingale with respect to $(\mathcal{F}_n)$. Hence by the convergence of martingales bounded in $L^2$ there exists an almost surely finite random variable $S_\infty$ such that $S_n\to S_\infty$ almost surely and in $L^2$ as $n\to\infty$.
+\end{proof}
 
 \begin{exercise}
 Let $(X_n)_{n \geq 1}$ be a sequence of independent (but not necessarily i.i.d.) random variables, and let $(\mathcal{F}_n)_{n \geq 1}$ be the natural filtration of $(X_n)_{n \geq 1}$. Assume that, for all $n \geq 1$, $\mathbb{E}[X_n] = 0$, and
