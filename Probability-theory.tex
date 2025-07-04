@@ -726,5 +726,22 @@ M_n = \sum_{i=1}^n \frac{X_i}{i} \quad \text{and} \quad S_n = \sum_{i=1}^n X_i.
 \item[(v)] Prove that $S_n/n \to 0$ almost surely when $n \to +\infty$. (You can use without proof the following lemma, credited to Cesàro: if $(x_n)_{n \geq 1}$ is a sequence of real numbers such that $x_n \to x$ when $n \to +\infty$, then $\frac{1}{n} \sum_{i=1}^n x_i \to x$.)
 \end{enumerate}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(i)] $M_n$ is clearly $\mathcal{F}_n$-measurable and integrable. Finally,\begin{align*}
+\mathbb{E}[M_{n+1}|\mathcal{F}_n]&=\mathbb{E}\left[\frac{X_{n+1}}{n+1}+M_n|\mathcal{F}_n\right]\\&=\frac{1}{n+1}\mathbb{E}[X_{n+1}]+M_n\\&=M_n.
+\end{align*}Hence $(M_n)_{n\geq 1}$ is a martingale with respect to $(\mathcal{F}_n)_{n\geq 1}$.
+\item[(ii)]
+We have that\[\sum_{i=1}^\infty\frac{\mathbb{E}[X_i^2]}{i^2}<\infty.\] Furthermore, by independence, \[\mathbb{E}[X_iX_j]=\mathbb{E}[X_i]\mathbb{E}[X_j]=0\forall i\neq j.\] Hence
+\begin{align*}
+\mathbb{E}[|M_n|^2]&=\mathbb{E}\left[\left(\sum_{i=1}^n\frac{X_i}{i}\right)^2\right]\\&=\sum_{1\leq i,j\leq n}\frac{\mathbb{E}[X_iX_j]}{ij}\\&=\sum_{i=1}^n\frac{\mathbb{E}[X_i^2]}{i^2}\\&\leq\sum_{i=1}^\infty\frac{\mathbb{E}[X_i^2]}{i^2}<\infty\forall n
+\end{align*}so $(M_n)_{n\geq1}$ is bounded in $L^2$.
+\item[(iii)] Follows from the convergence theorem for martingales bounded in $L^2$.
+\item[(iv)]\begin{align*}
+M_n-\frac{1}{n+1}\sum_{i=1}^nM_i&=\sum_{i=1}^n\frac{X_i}{i}-\frac{1}{n+1}\sum_{i=1}^n\frac{(n-i+1)X_i}{i}\\&=\frac{1}{n+1}\sum_{i=1}^n\frac{(n+1)X_i}{i}+\frac{1}{n+1}\sum_{i=1}^n\frac{(i-n-1)X_i}{i}\\&=\frac{1}{n+1}\sum_{i=1}^n\frac{iX_i}{i}\\&=\frac{S_n}{n+1}.
+\end{align*}
+\item[(v)] \[\frac{S_n}{n}=\frac{(n+1)M_n}{n}-\frac{1}{n}\sum_{i=1}^nM_i\to M_\infty-M_\infty=0\] as $n\to\infty$.
+\end{enumerate}
+\end{proof}
 
 \end{document}
