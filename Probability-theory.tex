@@ -744,4 +744,49 @@ M_n-\frac{1}{n+1}\sum_{i=1}^nM_i&=\sum_{i=1}^n\frac{X_i}{i}-\frac{1}{n+1}\sum_{i
 \end{enumerate}
 \end{proof}
 
+\begin{exercise}
+Assume that $(X_i)_{i \geq 1}$ is a sequence of independent random variables such that, for all $i \geq 1$, $\mathbb{E}[X_i] = 0$ and $\sigma_i^2 := \mathbb{E}[X_i^2] < \infty$. For all $n \geq 1$, let $M_n = \sum_{i=1}^n X_i$. Then $(M_n)_{n \geq 0}$ is a martingale on the natural filtration of the sequence $(X_i)_{i \geq 1}$. The two following questions (a) and (b) are independent.
+
+\begin{itemize}
+    \item[(a)] Show that, for all $n \geq 1$, $\langle M \rangle_n = \sum_{i=1}^{n-1} \sigma_i^2$ for $n \geq 1$. (We recall that $\langle M \rangle$ is the previsible process in the Doob’s decomposition of $(M_n^2)_{n \geq 0}$.)
+    
+    \item[(b)] Use Doob’s martingale inequality to prove \textit{Kolmogorov’s inequality} which says that for any $a > 0$, for any $n \geq 1$,
+    \[
+    \mathbb{P} \left( \max_{1 \leq i \leq n} |M_i| \geq a \right) \leq a^{-2} \sum_{i=1}^n \sigma_i^2.
+    \]
+\end{itemize}
+\end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] Let $(\mathcal{F}_n)_{n\geq0}$ be the natural filtration of $(X_i)_{i\geq 1}$. Let $(A_n)_{n\geq0}$ be defined by \[A_n=\sum_{i=1}^{n-1}\sigma_i^2\forall n\geq0.\]$(A_{n\geq0})_{n\geq0}$ is deterministic and hence $(\mathcal{F}_n)_{n\geq0}$-predictable. Furthermore, $A_0=0$. It remains to show that $(M_n^2-A_n)_{n\geq0}$ is an $(\mathcal{F}_n)_{n\geq0}$-martingale. $M_n^2-A_n$ is clearly $\mathcal{F}_n$-measurable and integrable $\forall n$. Furthermore,\begin{align*}
+\mathbb{E}[M_{n+1}^2-A_{n+1}|\mathcal{F}_n]&=\mathbb{E}\left[\left(X_{n+1}+M_n\right)^2-A_n-\sigma_n^2|\mathcal{F}_n\right]\\&=\mathbb{E}[X_{n+1}^2]+2M_n\mathbb{E}[X_{n+1}|\mathcal{F}_n]+M_n^2-A_n-\sigma_n^2\\&=M_n^2-A_n.
+\end{align*}Hence $((M_n^2-A_n)_{n\geq0},(A_n)_{n\geq0})$ is the Doob decomposition of $(M_n^2)_{n\geq 0}$ so $\langle M\rangle_n=A_n\forall n$ almost surely.
+\item[(b)] $(M_n^2)_{n\geq0}$ is a non-negative submartingale so $\forall n\geq1,a>0$,\[\mathbb{P}(\max_{1\leq i\leq n}|M_i|\geq a)=\mathbb{P}(\max_{1\leq i\leq n}M_i^2\geq a^2)\leq\frac{\mathbb{E}[M_n^2]}{a^2}=a^{-2}\sum_{i=1}^n\sigma_i^2.\]
+\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+Let $(\mathcal{F}_n)_{n \geq 0}$ be a filtration. Assume that $(X_n)_{n \geq 0}$ is a non-negative super-martingale and $T$ is a stopping time, both with respect to $(\mathcal{F}_n)_{n \geq 0}$. Recall that, by Corollary 7.7, $(X_{T \wedge n})_{n \geq 0}$ is an $(\mathcal{F}_n)_{n \geq 0}$ super-martingale.
+
+\begin{itemize}
+    \item[(a)] Using Fatou’s lemma, show that
+    \[
+    \mathbb{E}[X_T \mathbf{1}_{T < \infty}] \leq \mathbb{E}[X_0].
+    \]
+
+    \item[(b)] Deduce that $c \, \mathbb{P} \left( \sup_n X_n \geq c \right) \leq \mathbb{E}[X_0]$ for any $c \geq 0$.
+\end{itemize}
+\end{exercise}
+
+
+\begin{exercise}
+\textit{The Moran model.} Let $N, m \in \mathbb{N}$ with $m < N$. We consider a population of $N$ individuals, out of which initially (in generation 0) $m$ have the (genetic) type $a$, while the rest has type $A$. At every time-step (generation), one of the individuals (chosen uniformly at random) dies, and at the same time, a new one is born. Given all previous steps, the probability that the new individual has type $a$ is equal to the proportion of type $a$ in the previous generation. For all $n \geq 0$, let $X_n$ be the proportion of individuals of type $a$ in generation $n$. We also let $T := \inf\{n \in \mathbb{N} \mid X_n \in \{0,1\}\}$.
+
+\begin{itemize}
+    \item[(a)] Show that $(X_n)_{n \geq 0}$ is a martingale that converges almost surely as $n$ tends to infinity.
+    \item[(b)] Show that $\mathbb{P}(T < \infty) = 1$.
+    \item[(c)] Calculate $\mathbb{P}(\lim_{n \uparrow \infty} X_n = 1)$.
+\end{itemize}
+\end{exercise}
+
 \end{document}
