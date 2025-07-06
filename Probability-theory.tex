@@ -777,7 +777,12 @@ Let $(\mathcal{F}_n)_{n \geq 0}$ be a filtration. Assume that $(X_n)_{n \geq 0}$
     \item[(b)] Deduce that $c \, \mathbb{P} \left( \sup_n X_n \geq c \right) \leq \mathbb{E}[X_0]$ for any $c \geq 0$.
 \end{itemize}
 \end{exercise}
-
+\begin{proof}
+\begin{enumerate}
+\item[(a)] If $T<\infty$ then $\lim_{n\to\infty}X_{T\wedge n}=X_T$, and hence $\liminf_{n\to\infty}X_{T\wedge n}=X_T$. However, if $T=\infty$, then $X_{T\wedge n}=X_n\forall n$. Hence \[\liminf_{n\to\infty}X_{T\wedge n}=X_T\mathbf{1}_{\{T<\infty\}}+\liminf_{n\to\infty}X_n\mathbf{1}_{\{T=\infty\}}.\] Furthermore, since $(X_{T\wedge n})$ is a super-martingale, \[\mathbb{E}[X_{T\wedge n}]\leq\mathbb{E}[X_{T\wedge 0}]=\mathbb{E}[X_0]\forall n\] so\[\liminf_{n\to\infty}\mathbb{E}[X_{T\wedge n}]\leq\mathbb{E}[X_0].\] Hence, by Fatou's inequality,\[\mathbb{E}[X_T\mathbf{1}_{\{T<\infty\}}]\leq\mathbb{E}[\liminf_{n\to\infty}X_{T\wedge n}]\leq\liminf_{n\to\infty}\mathbb{E}[X_{T\wedge n}]\leq\mathbb{E}[X_0].\]
+\item[(b)] Let $T:=\inf\{n\in\mathbb{N}:X_n\geq c\}$, which is clearly a stopping time. Then \[\{T<\infty\}=\{\sup_nX_n\geq c\}.\] Hence\[c\mathbb{P}(\sup_nX_n\geq c)=c\mathbb{E}[\mathbf{1}_{\{T<\infty\}}]\leq\mathbb{E}[X_T\mathbf{1}_{\{T<\infty\}}]\leq\mathbb{E}[X_0].\]
+\end{enumerate}
+\end{proof}
 
 \begin{exercise}
 \textit{The Moran model.} Let $N, m \in \mathbb{N}$ with $m < N$. We consider a population of $N$ individuals, out of which initially (in generation 0) $m$ have the (genetic) type $a$, while the rest has type $A$. At every time-step (generation), one of the individuals (chosen uniformly at random) dies, and at the same time, a new one is born. Given all previous steps, the probability that the new individual has type $a$ is equal to the proportion of type $a$ in the previous generation. For all $n \geq 0$, let $X_n$ be the proportion of individuals of type $a$ in generation $n$. We also let $T := \inf\{n \in \mathbb{N} \mid X_n \in \{0,1\}\}$.
@@ -788,5 +793,14 @@ Let $(\mathcal{F}_n)_{n \geq 0}$ be a filtration. Assume that $(X_n)_{n \geq 0}$
     \item[(c)] Calculate $\mathbb{P}(\lim_{n \uparrow \infty} X_n = 1)$.
 \end{itemize}
 \end{exercise}
+\begin{proof}
+\begin{enumerate}
+\item[(a)] Let $(V_n)_{n\geq 1}$ be defined such that $V_n=0$ if the person who dies in generation $n$ has type $A$, and $V_n=-1$ if the person who dies in generation $n$ has type $a$. Let $(W_n)_{n\geq1}$ be defined such that $W_n=1$ if the person born in generation $n$ has type $a$, and $W_n=0$ if the person born in generation $n$ has type $A$. Then\[X_{n+1}=\frac{V_n+W_n+NX_n}{N}=\frac{V_n+W_n}{N}+X_n.\] Let $(\mathcal{F}_n)_{n\geq0}$ be the natural filtration of $(X_n)_{n\geq0}$. Then $\forall n$, $X_n$ is $\mathcal{F}_n$-measurable by definition, and is clearly integrable. Finally,\begin{align*}
+\mathbb{E}[X_{n+1}|\mathcal{F}_n]&=\frac{1}{N}\mathbb{E}[V_n+W_n|\mathcal{F}_n]+X_n\\&=\frac{-\mathbb{P}(V_n=-1|\mathcal{F}_n)+\mathbb{P}(W_n=1|\mathcal{F}_n)}{N}+X_n\\&=\frac{-X_n+X_n}{N}+X_n\\&=X_n\text{ almost surely}.
+\end{align*}Hence $(X_n)_{n\geq0}$ is an $(\mathcal{F}_n)_{n\geq0}$-martingale. Furthermore, $(X_n)_{n\geq0}$ is non-negative, so by the martingale convergence theorem there exists a random variable $X_\infty$ such that $X_n\to X_\infty$ as $n\to\infty$ almost surely.
+\item[(b)] Since $X_n$ takes only values in $\{0,\frac{1}{N},\frac{2}{N},...,1\}$, $X_n$ converges if and only if $X_n$ is eventually constant. If $X_k=0$ then $X_n=0\forall n>k$ almost surely, and if $X_k=1$ then $X_n=1\forall n>k$ almost surely. However, if $X_k\not\in\{0,1\}$ then $\mathbb{P}(X_n=X_k\forall n>k)=0$ and hence\begin{align*}\mathbb{P}(X_n\text{ converges}|T=\infty)&=\mathbb{P}\left(\bigcup_{k=1}^\infty\bigcap_{n=k}^\infty\{X_n=X_k\}|T=\infty\right)\\&\leq\sum_{k=1}^\infty\mathbb{P}\left(\bigcap_{n=k}^\infty \{X_n=X_k\}|T=\infty\right)\\&=0\end{align*} so $X_n$ does not converge almost surely. Suppose $\mathbb{P}(T=\infty)>1$. Then \begin{align*}1=\mathbb{P}(X_n\text{ converges})&=\mathbb{P}(X_n\text{ converges}|T<\infty)\mathbb{P}(T<\infty)+\mathbb{P}(X_n\text{ converges}|T=\infty)\mathbb{P}(T=\infty)\\&=\mathbb{P}(X_n\text{ converges}|T<\infty)\mathbb{P}(T<\infty)\\&=\mathbb{P}(X_n\text{ converges}|T<\infty)(1-\mathbb{P}(T=\infty))\\&<1; \text{ a contradiction.}\end{align*} Hence $\mathbb{P}(T<\infty)=1$.
+\item[(c)] $T<\infty$ almost surely and $(X_n)_{n\geq0}$ is bounded, so by the optional stopping theorem\[\mathbb{E}[X_T]=\mathbb{E}[X_0]=\frac{m}{N}.\] Since $X_n$ converges almost surely,\[\mathbb{E}[X_T]=1\cdot\mathbb{P}(\lim_{n\to\infty}X_n=1)+0\cdot\mathbb{P}(\lim_{n\to\infty}X_n=0),\] and hence\[\mathbb{P}(\lim_{n\to\infty}X_n=1)=\frac{m}{N}.\]
+\end{enumerate}
+\end{proof}
 
 \end{document}
